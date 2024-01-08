@@ -1,26 +1,51 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UsersRepository } from './repositories/user.repository';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+
+  constructor(private userRepository: UsersRepository){}
+
+  async create(createUserDto: CreateUserDto) {
+    const user = await this.userRepository.create(createUserDto)
+    return user
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    const users = await this.userRepository.findAll()
+    return users
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    const user = await this.userRepository.findOne(id)
+    if(!user){
+      throw new NotAcceptableException("User Not Found!")
+    }
+    return user
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async findByEmail(email: string) {
+    const user = await this.userRepository.findByEmail(email)
+    return user
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const user = await this.userRepository.update(id, updateUserDto)
+    if(!user){
+      throw new NotAcceptableException("User Not Found!")
+    }
+    return user
+  }
+
+  async remove(id: string) {
+    const user = await this.userRepository.findOne(id)
+    
+    if(!user){
+      throw new NotAcceptableException("User Not Found!")
+    }
+    await this.userRepository.delete(id)
+    return
   }
 }
