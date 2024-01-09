@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto"
-import moment from "moment"
+import * as moment from 'moment';
 
 export class SuportCard {
     readonly id: string 
@@ -8,13 +8,13 @@ export class SuportCard {
     tasks: string[] | null
     solution: string | null
     priority: string | null
-    readonly createdAt: string | null;
-    readonly updatedAt: string | null
+    readonly createdAt: string
+    readonly updatedAt: string
+    user_id?: string
 
-    constructor(){
-        this.id = randomUUID(),
-        this.createdAt = moment().format('DD/MM/YYYY HH:mm:ss');
-        this.updatedAt = moment().format('DD/MM/YYYY HH:mm:ss');
-
+    constructor() {
+        this.id = randomUUID()
+        this.createdAt = moment().format('DD/MM/YYYY HH:mm:ss')
+        this.updatedAt = moment().format('DD/MM/YYYY HH:mm:ss')
     }
 }
