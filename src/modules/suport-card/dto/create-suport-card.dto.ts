@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsString } from "class-validator"
+import { IsArray, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator"
 
 enum CardPriority {
     PRIORIDADE01 = 'Muito Urgente',
@@ -13,20 +13,18 @@ export class CreateSuportCardDto {
     title: string
 
     @IsString()
-    descriptin: string
+    @IsOptional()
+    descriptin: string | null
 
     @IsArray()
-    tasks: string[]
+    @IsOptional()
+    tasks: string[] | null
 
     @IsString()
-    solution: string
+    @IsOptional()
+    solution: string | null
 
-    @IsString()
-    priority: string
-
-    @IsString()
-    createdAt: string
-
-    @IsString()
-    updatedAt: string
+    @IsEnum(CardPriority, { message: "Prioridade inválida" })
+    @IsOptional()
+    priority: CardPriority | null
 }
