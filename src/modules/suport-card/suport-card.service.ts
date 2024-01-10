@@ -7,8 +7,9 @@ import { SuportCardRepository } from './repositories/suportCard.repository';
 export class SuportCardService {
   constructor(private suportCardRepository: SuportCardRepository){}
 
-  async create(createSuportCardDto: CreateSuportCardDto) {
-    const suportCard =  await this.suportCardRepository.create(createSuportCardDto)
+  async create(createSuportCardDto: CreateSuportCardDto, userId: string) {
+    console.log(userId)
+    const suportCard =  await this.suportCardRepository.create(createSuportCardDto, userId)
     return suportCard
   }
 

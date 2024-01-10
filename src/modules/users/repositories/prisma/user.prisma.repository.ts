@@ -5,6 +5,7 @@ import { UsersRepository } from '../user.repository';
 import { CreateUserDto } from '../../dto/create-user.dto';
 import { User } from '../../entities/user.entity';
 import { UpdateUserDto } from '../../dto/update-user.dto';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class UserPrismaRepository implements UsersRepository {
@@ -16,37 +17,39 @@ export class UserPrismaRepository implements UsersRepository {
         Object.assign(user, {
            ...data,
         })
-        const newUser = await this.prisma.user.create({data: {...data}})
-        return newUser
+        const newUser = await this.prisma.user.create({data: {...user}})
+        return plainToInstance(User, newUser)
     }
 
     async findAll(): Promise<any> {
-        const user = await this.prisma.user.findAll()
-        return user
+        const user = await this.prisma.user.findMany()
+        return plainToInstance(User, user)
     }
     
     async findOne(id: string): Promise<User> {
-        const user = this.prisma.user.findUnique({
+        const user = await this.prisma.user.findUnique({
             where: {id}
         })
-        return user   
+        return plainToInstance(User, user)   
     }
 
-    findByEmail(email: string): User | Promise<User> {
-        const user = this.prisma.user.find((user) => user.email == email)
+    async findByEmail(email: string): Promise<User> {
+        const user = await this.prisma.user.findUnique({
+            where: {email}
+        })
         return user
     }
 
     async update(id: string, data: UpdateUserDto): Promise<User> {
-        const userIndex = this.prisma.user.update({
+        const userIndex = await this.prisma.user.update({
             where: {id},
             data: {...data}
         })
-        return userIndex
+        return plainToInstance(User, userIndex)
     }
 
     async delete(id: string): Promise<void> {
-        this.prisma.user.delete({
+       await this.prisma.user.delete({
             where: {id}
         })
     }

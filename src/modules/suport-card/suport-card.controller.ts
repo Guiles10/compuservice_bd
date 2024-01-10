@@ -1,15 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Request, UseGuards } from '@nestjs/common';
 import { SuportCardService } from './suport-card.service';
 import { CreateSuportCardDto } from './dto/create-suport-card.dto';
 import { UpdateSuportCardDto } from './dto/update-suport-card.dto';
+import { JWTAuthGuard } from '../auth/jwt.auth.guard';
 
 @Controller('suport_card')
 export class SuportCardController {
   constructor(private readonly suportCardService: SuportCardService) {}
 
   @Post('')
-  create(@Body() createSuportCardDto: CreateSuportCardDto) {
-    return this.suportCardService.create(createSuportCardDto);
+  @UseGuards(JWTAuthGuard)
+  create(@Body() createSuportCardDto: CreateSuportCardDto, @Request() req) {
+    return this.suportCardService.create(createSuportCardDto, req.user?.id);
   }
 
   @Get('')

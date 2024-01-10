@@ -26,8 +26,9 @@ export class CreateUserDto {
     })
     password: string
 
-    @IsEnum(UserFunction, { each: true, message: "Opção de função inválida" })
-    functions: UserFunction[];
+    @IsString()
+    @IsEnum(UserFunction)
+    function: UserFunction;
 
     @IsBoolean()
     @IsNotEmpty()
