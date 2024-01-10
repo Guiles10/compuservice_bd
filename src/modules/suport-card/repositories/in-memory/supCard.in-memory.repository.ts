@@ -10,12 +10,14 @@ export class SuportCardInMemoryRepository implements SuportCardRepository {
 
     private dataBaseCard: SuportCard[] = []
 
-    create(data: CreateSuportCardDto): SuportCard | Promise<SuportCard> {
+    create(data: CreateSuportCardDto, userId: string): SuportCard | Promise<SuportCard> {
         const newCard = new SuportCard()
         Object.assign(newCard, {
            ...data,
+           userId,
         })
         this.dataBaseCard.push(newCard)
+        console.log(newCard)
         return newCard
     }
 
