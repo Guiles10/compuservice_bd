@@ -17,7 +17,6 @@ export class SuportCardInMemoryRepository implements SuportCardRepository {
            userId,
         })
         this.dataBaseCard.push(newCard)
-        console.log(newCard)
         return newCard
     }
 

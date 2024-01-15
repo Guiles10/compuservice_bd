@@ -12,10 +12,10 @@ export class SuportCardPrismaRepository implements SuportCardRepository {
     constructor(private prisma: PrismaService){} 
 
     async create(data: CreateSuportCardDto, userId: string):Promise<SuportCard> {
-        console.log(userId)
         const supCard = new SuportCard()
         Object.assign(supCard, {
            ...data,
+           status: data.status || "A Fazer",
         })
         const newCard = await this.prisma.suportCard.create({
             data: { ...supCard, userId }
@@ -29,14 +29,14 @@ export class SuportCardPrismaRepository implements SuportCardRepository {
     }
     
     async findOne(id: string): Promise<SuportCard> {
-        const supCard = this.prisma.suportCard.findUnique({
+        const supCard = await this.prisma.suportCard.findUnique({
             where: {id}
         })
         return supCard   
     }
 
     async update(id: string, data: UpdateSuportCardDto): Promise<SuportCard> {
-        const supCardIndex = this.prisma.suportCard.update({
+        const supCardIndex = await this.prisma.suportCard.update({
             where: {id},
             data: {...data}
         })
@@ -44,7 +44,8 @@ export class SuportCardPrismaRepository implements SuportCardRepository {
     }
 
     async delete(id: string): Promise<void> {
-        this.prisma.suportCard.delete({
+        console.log(id)
+        await this.prisma.suportCard.delete({
             where: {id}
         })
     }

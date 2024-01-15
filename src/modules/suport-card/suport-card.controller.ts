@@ -25,12 +25,14 @@ export class SuportCardController {
   }
 
   @Patch(':id')
+  @UseGuards(JWTAuthGuard)
   update(@Param('id') id: string, @Body() updateSuportCardDto: UpdateSuportCardDto) {
     return this.suportCardService.update(id, updateSuportCardDto);
   }
 
   @HttpCode(204)
   @Delete(':id')
+  @UseGuards(JWTAuthGuard)
   remove(@Param('id') id: string) {
     return this.suportCardService.remove(id);
   }

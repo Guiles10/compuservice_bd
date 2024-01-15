@@ -14,7 +14,7 @@ export class CreateSuportCardDto {
 
     @IsString()
     @IsOptional()
-    descriptin: string | null
+    description: string | null
 
     @IsArray()
     @IsOptional()
@@ -27,4 +27,8 @@ export class CreateSuportCardDto {
     @IsEnum(CardPriority, { message: "Prioridade inválida" })
     @IsOptional()
     priority: CardPriority | null
+
+    @IsString()
+    @IsOptional()
+    status: string
 }

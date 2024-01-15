@@ -4,10 +4,11 @@ import * as moment from 'moment';
 export class SuportCard {
     readonly id: string 
     title: string
-    descriptin: string | null
+    description: string | null
     tasks: string[] | null
     solution: string | null
     priority: string | null
+    status: string
     readonly createdAt: string
     readonly updatedAt: string
     user_id?: string
