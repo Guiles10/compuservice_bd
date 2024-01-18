@@ -1,6 +1,6 @@
 import { hashSync } from "bcryptjs"
 import { Transform } from "class-transformer"
-import { IsBoolean, IsEnum, IsNotEmpty, IsString, MinLength } from "class-validator"
+import { IsBoolean, IsEnum, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator"
 
 enum UserFunction {
     ATENDIMENTO = 'Atendimento',
@@ -30,7 +30,7 @@ export class CreateUserDto {
     @IsEnum(UserFunction)
     function: UserFunction;
 
+    @IsOptional()
     @IsBoolean()
-    @IsNotEmpty()
-    isAdmin: boolean
+    isAdmin: boolean;
 }

@@ -14,9 +14,13 @@ export class UserPrismaRepository implements UsersRepository {
 
     async create(data: CreateUserDto): Promise<User> {
         const user = new User()
+        if(!data.isAdmin){
+            data.isAdmin = false
+        }
         Object.assign(user, {
            ...data,
         })
+        console.log(user)
         const newUser = await this.prisma.user.create({data: {...user}})
         return plainToInstance(User, newUser)
     }

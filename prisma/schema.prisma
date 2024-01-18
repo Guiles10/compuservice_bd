@@ -11,30 +11,55 @@ datasource db {
 }
 
 model User {
-  id         String       @id
-  name       String
-  email      String       @unique
-  password   String
-  function   String
-  isAdmin    Boolean
-  suportCard SuportCard[]
+  id          String       @id
+  name        String
+  email       String       @unique
+  password    String
+  function    String
+  isAdmin     Boolean
+  suportCards SuportCard[]
+  comments    Comment[]
 
   @@map("users")
 }
 
 model SuportCard {
-  id          String   @id
+  id          String  @id
   title       String
   description String?
-  tasks       String[]
   solution    String?
   priority    String?
   status      String?
-  createdAt   String?
+  createdAt   String
   updatedAt   String?
+  deleteAt    String?
+  tasks       Task[]
 
   user   User   @relation(fields: [userId], references: [id])
   userId String
 
   @@map("suport_card")
+}
+
+model Task {
+  id           String     @id
+  task         String
+  completed    Boolean
+  createdAt    String
+  updatedAt    String
+  suportCard   SuportCard @relation(fields: [suportCardId], references: [id])
+  suportCardId String
+
+  @@map("tasks")
+}
+
+model Comment {
+  id        String @id
+  comment   String
+  createdAt String
+  updatedAt String
+  user      User   @relation(fields: [userId], references: [id])
+  userId    String
+
+  @@map("comments")
 }

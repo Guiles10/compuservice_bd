@@ -1,34 +1,37 @@
-import { IsArray, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator"
+
+import { IsArray, IsBoolean, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 enum CardPriority {
-    PRIORIDADE01 = 'Muito Urgente',
-    PRIORIDADE02 = 'Urgente',
-    PRIORIDADE03 = 'Normal',
-    PRIORIDADE04 = 'Basica',
+  PRIORIDADE01 = 'Muito Urgente',
+  PRIORIDADE02 = 'Urgente',
+  PRIORIDADE03 = 'Normal',
+  PRIORIDADE04 = 'Basica',
+}
+enum CardStatus {
+  TODO = 'A Fazer',
+  IN_PROGRESS = 'Em Andamento',
+  DONE = 'Concluído',
 }
 
+
 export class CreateSuportCardDto {
-    @IsString()
-    @IsNotEmpty()
-    title: string
+  @IsString()
+  @IsNotEmpty()
+  title: string;
 
-    @IsString()
-    @IsOptional()
-    description: string | null
+  @IsString()
+  @IsOptional()
+  description: string | null;
 
-    @IsArray()
-    @IsOptional()
-    tasks: string[] | null
+  @IsString()
+  @IsOptional()
+  solution: string | null;
 
-    @IsString()
-    @IsOptional()
-    solution: string | null
+  @IsEnum(CardPriority, { message: "Prioridade inválida" })
+  @IsOptional()
+  priority: CardPriority | null;
 
-    @IsEnum(CardPriority, { message: "Prioridade inválida" })
-    @IsOptional()
-    priority: CardPriority | null
-
-    @IsString()
-    @IsOptional()
-    status: string
+  @IsEnum(CardStatus, { message: "Status inválido" })
+  @IsOptional()
+  status: CardStatus | null;
 }
