@@ -30,13 +30,35 @@ export class SuportCardInMemoryRepository implements SuportCardRepository {
     }
 
     update(id: string, data: UpdateSuportCardDto): SuportCard | Promise<SuportCard> {
-        const userIndex = this.dataBaseCard.findIndex((card) => card.id == id)
-        this. dataBaseCard[userIndex] = {
-            ...this.dataBaseCard[userIndex],
-            ...data
+        const cardIndex = this.dataBaseCard.findIndex((card) => card.id === id);
+    
+        if (cardIndex !== -1) {
+            const updatedCard: any = {
+                ...this.dataBaseCard[cardIndex],
+                ...data,
+            };
+    
+            // if (data.tasks) {
+            //     updatedCard.tasks = data.tasks.map((task) => task.task);
+            //     // Adicione um loop para atualizar o estado das tarefas
+            //     data.tasks.forEach((task, index) => {
+            //         updatedCard.tasks[index] = {
+            //             task: task.task,
+            //             completed: task.completed,
+            //         };
+            //     });
+            // }
+    
+            this.dataBaseCard[cardIndex] = updatedCard;
+    
+            return this.dataBaseCard[cardIndex];
         }
-        return this.dataBaseCard[userIndex]
+    
+        // Retorne algo ou lance uma exceção se o card não for encontrado
+        // (Dependendo dos requisitos da sua aplicação)
+        return null;
     }
+    
 
     delete(id: string): void | Promise<void> {
         const userIndex = this.dataBaseCard.findIndex((user) => user.id == id)

@@ -3,6 +3,7 @@ import { SuportCardService } from './suport-card.service';
 import { CreateSuportCardDto } from './dto/create-suport-card.dto';
 import { UpdateSuportCardDto } from './dto/update-suport-card.dto';
 import { JWTAuthGuard } from '../auth/jwt.auth.guard';
+import { SuportCard } from './entities/suport-card.entity';
 
 @Controller('suport_card')
 export class SuportCardController {
@@ -25,9 +26,8 @@ export class SuportCardController {
   }
 
   @Patch(':id')
-  @UseGuards(JWTAuthGuard)
-  update(@Param('id') id: string, @Body() updateSuportCardDto: UpdateSuportCardDto) {
-    return this.suportCardService.update(id, updateSuportCardDto);
+  async updateCard( @Param('id') id: string, @Body() updateCardDto: UpdateSuportCardDto ): Promise<SuportCard> {
+      return this.suportCardService.update(id, updateCardDto);
   }
 
   @HttpCode(204)
