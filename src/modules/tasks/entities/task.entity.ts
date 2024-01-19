@@ -2,12 +2,12 @@ import { randomUUID } from "crypto";
 import * as moment from 'moment';
 
 export class Task {
-    readonly id: string;
-    task:         string
-    completed:    boolean
-    suportCardId: string
-    readonly updatedAt: string;
-    readonly createdAt: string;
+    readonly id:    string
+    task:           string
+    completed:      boolean
+    suportCardId:   string
+    readonly updatedAt:     string;
+    readonly createdAt:     string;
 
     constructor() {
         this.id = randomUUID();

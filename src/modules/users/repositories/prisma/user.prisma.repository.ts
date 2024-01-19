@@ -20,7 +20,6 @@ export class UserPrismaRepository implements UsersRepository {
         Object.assign(user, {
            ...data,
         })
-        console.log(user)
         const newUser = await this.prisma.user.create({data: {...user}})
         return plainToInstance(User, newUser)
     }

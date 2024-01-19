@@ -24,8 +24,8 @@ export class TaskService {
     return findTask
   }
 
-  async update(id: string, updateTaskDto: UpdateTaskDto) {
-    const Task = await this.taskRepository.update(id, updateTaskDto)
+  async update(suportCardId: string, taskId: string, updateTaskDto: UpdateTaskDto) {
+    const Task = await this.taskRepository.update(suportCardId, taskId, updateTaskDto)
     if(!Task){
       throw new NotAcceptableException("Card Not Found!")
     }

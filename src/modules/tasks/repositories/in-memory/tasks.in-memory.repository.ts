@@ -30,36 +30,10 @@ export class TaskInMemoryRepository implements TaskRepository {
         return card   
     }
 
-    update(id: string, data: UpdateTaskDto): Task | Promise<Task> {
-        const cardIndex = this.dataBaseTasks.findIndex((card) => card.id === id);
-    
-        if (cardIndex !== -1) {
-            const updatedCard: any = {
-                ...this.dataBaseTasks[cardIndex],
-                ...data,
-            };
-    
-            // if (data.tasks) {
-            //     updatedCard.tasks = data.tasks.map((task) => task.task);
-            //     // Adicione um loop para atualizar o estado das tarefas
-            //     data.tasks.forEach((task, index) => {
-            //         updatedCard.tasks[index] = {
-            //             task: task.task,
-            //             completed: task.completed,
-            //         };
-            //     });
-            // }
-    
-            this.dataBaseTasks[cardIndex] = updatedCard;
-    
-            return this.dataBaseTasks[cardIndex];
-        }
-    
-        // Retorne algo ou lance uma exceção se o card não for encontrado
-        // (Dependendo dos requisitos da sua aplicação)
-        return null;
+    update(suportCardId: string, taskId: string, data: UpdateTaskDto): any | Promise<any> {
     }
-    
+
+
 
     delete(id: string): void | Promise<void> {
         const userIndex = this.dataBaseTasks.findIndex((user) => user.id == id)

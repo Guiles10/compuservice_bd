@@ -83,8 +83,13 @@ export class SuportCardPrismaRepository implements SuportCardRepository {
     }
 
     async delete(id: string): Promise<void> {
-        await this.prisma.suportCard.delete({
-            where: { id }
+        await this.prisma.$transaction(async (prisma) => {
+            await prisma.task.deleteMany({
+                where: { suportCardId: id }
+            });
+            await prisma.suportCard.delete({
+                where: { id }
+            });
         });
     }
 }

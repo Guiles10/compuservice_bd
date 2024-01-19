@@ -24,9 +24,9 @@ export class TasksController {
     return this.taskService.findOne(suportCardId);
   }
 
-  @Patch(':id')
-  update(@Param('id') suportCardId: string, @Body() updateTaskDto: UpdateTaskDto) {
-    return this.taskService.update(suportCardId, updateTaskDto);
+  @Patch(':idsc/:idt')
+  update(@Param('idsc') suportCardId: string, @Param('idt') taskId: string, @Body() updateTaskDto: UpdateTaskDto) {
+    return this.taskService.update(suportCardId, taskId, updateTaskDto);
   }
 
   @Delete(':id')

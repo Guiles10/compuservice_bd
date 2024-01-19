@@ -15,13 +15,15 @@ export class TaskPrismaRepository implements TaskRepository {
         const tasks = new Task()
         Object.assign(tasks, {
             ...data,
-            completed: false
+            completed: data.completed || false
         })
         const newTasks = await this.prisma.task.create({
             data: { ...tasks, suportCardId }
         })
         return newTasks
     }
+
+
     async findAll(suportCardId: string): Promise<any> {
         const allTasks = await this.prisma.suportCard.findMany({
             where: {
@@ -41,9 +43,9 @@ export class TaskPrismaRepository implements TaskRepository {
         return supCard;
     }
 
-    async update(id: string, data: UpdateTaskDto): Promise<any> {
+    async update(suportCardId: string, taskId: string, data: UpdateTaskDto): Promise<any> {
         const taskIndex = await this.prisma.task.update({
-            where: { id },
+            where: { id: taskId },
             data: {
                 ...data,
             },

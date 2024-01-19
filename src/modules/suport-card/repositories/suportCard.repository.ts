@@ -3,7 +3,6 @@ import { UpdateSuportCardDto } from "../dto/update-suport-card.dto";
 import { SuportCard } from "../entities/suport-card.entity";
 
 
-//se comporta como uma Interface também
 export abstract class SuportCardRepository {
     abstract create(data: CreateSuportCardDto, userId: string): Promise<SuportCard> | SuportCard;
     abstract findAll(): Promise<SuportCard> | undefined | SuportCard[];
