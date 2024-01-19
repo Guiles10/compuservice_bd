@@ -10,7 +10,7 @@ enum CardPriority {
 enum CardStatus {
   TODO = 'A Fazer',
   IN_PROGRESS = 'Em Andamento',
-  DONE = 'Concluído',
+  DONE = 'Concluido',
 }
 
 
