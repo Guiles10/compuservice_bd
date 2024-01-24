@@ -26,8 +26,9 @@ export class SuportCardController {
   }
 
   @Patch(':id')
-  async updateCard( @Param('id') id: string, @Body() updateCardDto: UpdateSuportCardDto ): Promise<SuportCard> {
-      return this.suportCardService.update(id, updateCardDto);
+  @UseGuards(JWTAuthGuard)
+  async updateCard(@Param('id') id: string, @Body() updateCardDto: UpdateSuportCardDto): Promise<SuportCard> {
+    return this.suportCardService.update(id, updateCardDto);
   }
 
   @HttpCode(204)

@@ -1,24 +1,17 @@
 import { randomUUID } from "crypto";
 import * as moment from 'moment';
 
-export class SuportCard {
+export class Comments {
   readonly id: string;
-  title: string;
-  description: string | null;
-  solution: string | null;
+  comment: string;
   priority: string;
-  status: string;
   readonly createdAt: string;
   readonly updatedAt: string;
-  deleteAt: string | null;
   userId: string;
-  workers: any;
 
   constructor() {
     this.id = randomUUID();
     this.createdAt = moment().format('DD/MM/YYYY HH:mm:ss');
     this.updatedAt = moment().format('DD/MM/YYYY HH:mm:ss');
-    this.deleteAt = null;
-    this.workers = [];
   }
 }
