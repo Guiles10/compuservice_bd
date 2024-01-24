@@ -25,11 +25,13 @@ export class TasksController {
   }
 
   @Patch(':idsc/:idt')
+  @UseGuards(JWTAuthGuard)
   update(@Param('idsc') suportCardId: string, @Param('idt') taskId: string, @Body() updateTaskDto: UpdateTaskDto) {
     return this.taskService.update(suportCardId, taskId, updateTaskDto);
   }
 
   @Delete(':id')
+  @UseGuards(JWTAuthGuard)
   remove(@Param('id') id: string) {
     return this.taskService.remove(id);
   }

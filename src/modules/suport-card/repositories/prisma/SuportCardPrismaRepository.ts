@@ -24,7 +24,7 @@ export class SuportCardPrismaRepository implements SuportCardRepository {
         return plainToInstance(SuportCard, newCard)
     }
 
-    async findAll(): Promise<any> {
+    async findAll(): Promise<SuportCard[]> {
         const supCards = await this.prisma.suportCard.findMany({
             include: {
                 tasks: true,
@@ -39,7 +39,30 @@ export class SuportCardPrismaRepository implements SuportCardRepository {
                 },
             },
         });
-        return supCards
+    
+        const supCardsWithUsersPromises = supCards.map(async (supCard) => {
+            const usersPromises = supCard.workers.map(async (workerId) => {
+                const user = await this.prisma.user.findUnique({
+                    where: { id: workerId },
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true,
+                        function: true,
+                        isAdmin: true,
+                    },
+                });
+                return user;
+            });
+    
+            const users = await Promise.all(usersPromises);
+    
+            return { ...supCard, workers: users } as SuportCard;
+        });
+    
+        const supCardsWithUsers = await Promise.all(supCardsWithUsersPromises);
+    
+        return supCardsWithUsers;
     }
 
     async findOne(id: string): Promise<SuportCard> {
@@ -58,14 +81,41 @@ export class SuportCardPrismaRepository implements SuportCardRepository {
                 }
             },
         });
-        return supCard;
+        const usersPromises = supCard.workers.map(async (workerId) => {
+            const user = await this.prisma.user.findUnique({
+                where: { id: workerId },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    function: true,
+                    isAdmin: true,
+                },
+            });
+            return user;
+        });
+    
+        const users = await Promise.all(usersPromises);
+
+        return {...supCard, workers: users}
     }
 
     async update(id: string, data: UpdateSuportCardDto): Promise<SuportCard> {
+    
+        // Verificar se os usuários existem para os IDs fornecidos em workers
+        const existingUsers = await this.prisma.user.findMany({
+            where: { id: { in: data.workers } },
+        });
+    
+        // Filtrar IDs de usuários existentes
+        const existingUserIds = existingUsers.map((user) => user.id);
+    
+        // Atualizar o cartão de suporte incluindo apenas IDs de usuários existentes
         const supCardIndex = await this.prisma.suportCard.update({
             where: { id },
             data: {
                 ...data,
+                workers: { set: existingUserIds },
             },
             include: {
                 user: {
@@ -76,9 +126,10 @@ export class SuportCardPrismaRepository implements SuportCardRepository {
                         function: true,
                         isAdmin: true,
                     },
-                }
+                },
             },
         });
+    
         return supCardIndex;
     }
 

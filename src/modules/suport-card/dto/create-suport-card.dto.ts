@@ -34,4 +34,9 @@ export class CreateSuportCardDto {
   @IsEnum(CardStatus, { message: "Status inválido" })
   @IsOptional()
   status: CardStatus | null;
+
+  @IsArray()
+  @IsString({ each: true })
+  @IsOptional()
+  workers?: string[];
 }
