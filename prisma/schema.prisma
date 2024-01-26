@@ -1,0 +1,65 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String       @id
+  name        String
+  email       String       @unique
+  password    String
+  function    String
+  isAdmin     Boolean
+  suportCards SuportCard[]
+  comments    Comment[]
+
+  @@map("users")
+}
+
+model SuportCard {
+  id          String  @id
+  title       String
+  description String?
+  solution    String?
+  priority    String?
+  status      String?
+  createdAt   String
+  updatedAt   String?
+  deleteAt    String?
+  tasks       Task[]
+  workers     String[]
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@map("suport_card")
+}
+
+model Task {
+  id           String     @id
+  task         String
+  completed    Boolean
+  createdAt    String
+  updatedAt    String
+  suportCard   SuportCard @relation(fields: [suportCardId], references: [id])
+  suportCardId String
+
+  @@map("tasks")
+}
+
+model Comment {
+  id        String @id
+  comment   String
+  createdAt String
+  updatedAt String
+  priority    String?
+  user      User   @relation(fields: [userId], references: [id])
+  userId    String
+
+  @@map("comments")
+}
