@@ -6,6 +6,7 @@ import { SuportCard } from '../../entities/suport-card.entity';
 import { UpdateSuportCardDto } from '../../dto/update-suport-card.dto';
 import { PrismaService } from 'src/database/prisma.service';
 import { plainToInstance } from 'class-transformer';
+import * as moment from 'moment';
 
 @Injectable()
 export class SuportCardPrismaRepository implements SuportCardRepository {
@@ -101,20 +102,16 @@ export class SuportCardPrismaRepository implements SuportCardRepository {
     }
 
     async update(id: string, data: UpdateSuportCardDto): Promise<SuportCard> {
-    
-        // Verificar se os usuários existem para os IDs fornecidos em workers
         const existingUsers = await this.prisma.user.findMany({
             where: { id: { in: data.workers } },
         });
-    
-        // Filtrar IDs de usuários existentes
+
         const existingUserIds = existingUsers.map((user) => user.id);
-    
-        // Atualizar o cartão de suporte incluindo apenas IDs de usuários existentes
         const supCardIndex = await this.prisma.suportCard.update({
             where: { id },
             data: {
                 ...data,
+                updatedAt: moment().format('DD/MM/YYYY HH:mm:ss'),
                 workers: { set: existingUserIds },
             },
             include: {
@@ -129,7 +126,6 @@ export class SuportCardPrismaRepository implements SuportCardRepository {
                 },
             },
         });
-    
         return supCardIndex;
     }
 
