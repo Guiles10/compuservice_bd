@@ -11,21 +11,21 @@ export class TaskPrismaRepository implements TaskRepository {
 
     constructor(private prisma: PrismaService){} 
 
-    async create(data: CreateTaskDto, suportCardId: string):Promise<Task> {
+    async create(data: CreateTaskDto, cardsId: string):Promise<Task> {
         const tasks = new Task()
         Object.assign(tasks, {
             ...data,
             completed: data.completed || false
         })
         const newTasks = await this.prisma.task.create({
-            data: { ...tasks, suportCardId }
+            data: { ...tasks, cardsId }
         })
         return newTasks
     }
 
 
     async findAll(suportCardId: string): Promise<any> {
-        const allTasks = await this.prisma.suportCard.findMany({
+        const allTasks = await this.prisma.cards.findMany({
             where: {
                 id: suportCardId,
             },
@@ -43,7 +43,7 @@ export class TaskPrismaRepository implements TaskRepository {
         return supCard;
     }
 
-    async update(suportCardId: string, taskId: string, data: UpdateTaskDto): Promise<any> {
+    async update(cardsId: string, taskId: string, data: UpdateTaskDto): Promise<any> {
         const taskIndex = await this.prisma.task.update({
             where: { id: taskId },
             data: {

@@ -9,7 +9,7 @@ export class User {
     @Exclude()
     password: string
     
-    function: string
+    function: string[]
     isAdmin: boolean
 
     constructor(){

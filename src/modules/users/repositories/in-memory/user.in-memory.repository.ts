@@ -33,13 +33,13 @@ export class UsersInMemoryRepository implements UsersRepository {
         return user
     }
 
-    update(id: string, data: UpdateUserDto): User | Promise<User> {
-        const userIndex = this.database.findIndex((user) => user.id == id)
-        this. database[userIndex] = {
-            ...this.database[userIndex],
-            ...data
-        }
-        return plainToInstance(User, this.database[userIndex])
+    update(id: string, data: UpdateUserDto): any | Promise<any> {
+        // const userIndex = this.database.findIndex((user) => user.id == id)
+        // this. database[userIndex] = {
+        //     ...this.database[userIndex],
+        //     ...data
+        // }
+        // return plainToInstance(User, this.database[userIndex])
     }
 
     delete(id: string): void | Promise<void> {

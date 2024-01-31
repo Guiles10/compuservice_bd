@@ -1,5 +1,5 @@
 
-import { IsArray, IsBoolean, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsArray, IsEnum, IsIn, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 enum CardPriority {
   PRIORIDADE01 = 'Muito Urgente',
@@ -12,9 +12,16 @@ enum CardStatus {
   IN_PROGRESS = 'Em Andamento',
   DONE = 'Concluido',
 }
+export enum UserFunction {
+  ATENDIMENTO = 'Atendimento',
+  SUPORTE = 'Suporte',
+  PROGRAMACAO = 'Programação',
+  FATURAMENTO = 'Faturamento',
+  SUPORTEHOSPTAL = 'Suporte Hospital',
+  INSTALACAO = 'Instalação',
+}
 
-
-export class CreateSuportCardDto {
+export class CreateCardsDto {
   @IsString()
   @IsNotEmpty()
   title: string;
@@ -36,7 +43,7 @@ export class CreateSuportCardDto {
   status: CardStatus | null;
 
   @IsArray()
-  @IsString({ each: true })
-  @IsOptional()
-  workers?: string[];
+  @IsNotEmpty({ message: "Escolha pelo menos uma atividade" }) 
+  @IsIn(Object.values(UserFunction), { each: true }) 
+  type: UserFunction[]; 
 }

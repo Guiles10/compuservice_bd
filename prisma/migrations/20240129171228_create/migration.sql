@@ -4,14 +4,14 @@ CREATE TABLE "users" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "function" TEXT NOT NULL,
+    "function" TEXT[],
     "isAdmin" BOOLEAN NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "suport_card" (
+CREATE TABLE "cards" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
@@ -21,9 +21,10 @@ CREATE TABLE "suport_card" (
     "createdAt" TEXT NOT NULL,
     "updatedAt" TEXT,
     "deleteAt" TEXT,
+    "type" TEXT[],
     "userId" TEXT NOT NULL,
 
-    CONSTRAINT "suport_card_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "cards_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -33,7 +34,7 @@ CREATE TABLE "tasks" (
     "completed" BOOLEAN NOT NULL,
     "createdAt" TEXT NOT NULL,
     "updatedAt" TEXT NOT NULL,
-    "suportCardId" TEXT NOT NULL,
+    "cardsId" TEXT NOT NULL,
 
     CONSTRAINT "tasks_pkey" PRIMARY KEY ("id")
 );
@@ -44,6 +45,7 @@ CREATE TABLE "comments" (
     "comment" TEXT NOT NULL,
     "createdAt" TEXT NOT NULL,
     "updatedAt" TEXT NOT NULL,
+    "priority" TEXT,
     "userId" TEXT NOT NULL,
 
     CONSTRAINT "comments_pkey" PRIMARY KEY ("id")
@@ -53,10 +55,10 @@ CREATE TABLE "comments" (
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- AddForeignKey
-ALTER TABLE "suport_card" ADD CONSTRAINT "suport_card_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "cards" ADD CONSTRAINT "cards_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "tasks" ADD CONSTRAINT "tasks_suportCardId_fkey" FOREIGN KEY ("suportCardId") REFERENCES "suport_card"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "tasks" ADD CONSTRAINT "tasks_cardsId_fkey" FOREIGN KEY ("cardsId") REFERENCES "cards"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "comments" ADD CONSTRAINT "comments_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,12 +1,14 @@
 import { hashSync } from "bcryptjs"
 import { Transform } from "class-transformer"
-import { IsBoolean, IsEnum, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator"
+import { IsArray, IsBoolean, IsEnum, IsIn, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator"
 
-enum UserFunction {
+export enum UserFunction {
     ATENDIMENTO = 'Atendimento',
     SUPORTE = 'Suporte',
-    PROGRAMADOR = 'Programador',
+    PROGRAMACAO = 'Programação',
     FATURAMENTO = 'Faturamento',
+    SUPORTEHOSPITAL = 'Suporte Hospital',
+    INSTALACAO = 'Instalação',
 }
 
 export class CreateUserDto {
@@ -26,11 +28,12 @@ export class CreateUserDto {
     })
     password: string
 
-    @IsString()
-    @IsEnum(UserFunction)
-    function: UserFunction;
+    @IsArray()
+    @IsNotEmpty({ message: "Escolha pelo menos uma atividade" }) 
+    @IsIn(Object.values(UserFunction), { each: true }) 
+    function: UserFunction[]; 
 
-    @IsOptional()
+    @IsNotEmpty({message: "O Usuario é ADM?"})
     @IsBoolean()
     isAdmin: boolean;
 }
