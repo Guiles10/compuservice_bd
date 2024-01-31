@@ -1,6 +1,6 @@
 
 import { Injectable } from '@nestjs/common';
-import { CardsRepository } from '../suportCard.repository';
+import { CardsRepository } from '../cards.repository';
 import { Cards } from '../../entities/cards.entity';
 import { CreateCardsDto } from '../../dto/create-cards.dto';
 import { UpdateCardsDto } from '../../dto/update-cards.dto';

@@ -1,6 +1,6 @@
 
 import { Injectable } from '@nestjs/common';
-import { CardsRepository } from '../suportCard.repository';
+import { CardsRepository } from '../cards.repository';
 import { PrismaService } from 'src/database/prisma.service';
 import { plainToInstance } from 'class-transformer';
 import * as moment from 'moment';
