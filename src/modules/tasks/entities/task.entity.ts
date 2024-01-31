@@ -5,7 +5,7 @@ export class Task {
     readonly id:    string
     task:           string
     completed:      boolean
-    suportCardId:   string
+    cardsId:   string
     readonly updatedAt:     string;
     readonly createdAt:     string;
 

@@ -1,17 +1,17 @@
 
 import { Injectable } from '@nestjs/common';
-import { SuportCardRepository } from '../suportCard.repository';
-import { CreateSuportCardDto } from '../../dto/create-suport-card.dto';
-import { SuportCard } from '../../entities/suport-card.entity';
-import { UpdateSuportCardDto } from '../../dto/update-suport-card.dto';
+import { CardsRepository } from '../suportCard.repository';
+import { Cards } from '../../entities/cards.entity';
+import { CreateCardsDto } from '../../dto/create-cards.dto';
+import { UpdateCardsDto } from '../../dto/update-cards.dto';
 
 @Injectable()
-export class SuportCardInMemoryRepository implements SuportCardRepository {
+export class CardsInMemoryRepository implements CardsRepository {
 
-    private dataBaseCard: SuportCard[] = []
+    private dataBaseCard: Cards[] = []
 
-    create(data: CreateSuportCardDto, userId: string): SuportCard | Promise<SuportCard> {
-        const newCard = new SuportCard()
+    create(data: CreateCardsDto, userId: string): Cards | Promise<Cards> {
+        const newCard = new Cards()
         Object.assign(newCard, {
            ...data,
            userId,
@@ -24,12 +24,12 @@ export class SuportCardInMemoryRepository implements SuportCardRepository {
         return this.dataBaseCard
     }
     
-    findOne(id: string): SuportCard | Promise<SuportCard> {
+    findOne(id: string): Cards | Promise<Cards> {
         const card = this.dataBaseCard.find((card) => card.id == id)
         return card   
     }
 
-    update(id: string, data: UpdateSuportCardDto): SuportCard | Promise<SuportCard> {
+    update(id: string, data: UpdateCardsDto): Cards | Promise<Cards> {
         const cardIndex = this.dataBaseCard.findIndex((card) => card.id === id);
     
         if (cardIndex !== -1) {
