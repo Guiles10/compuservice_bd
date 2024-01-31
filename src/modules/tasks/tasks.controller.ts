@@ -15,11 +15,13 @@ export class TasksController {
   }
   
   @Get(':id')
+  @UseGuards(JWTAuthGuard)
   findAll(@Param('id') suportCardId: string) {
     return this.taskService.findAll(suportCardId)
   }
 
   @Get(':id')
+  @UseGuards(JWTAuthGuard)
   findOne(@Param('id') suportCardId: string) {
     return this.taskService.findOne(suportCardId);
   }
