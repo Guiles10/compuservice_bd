@@ -2,7 +2,6 @@ import { IsArray, IsBoolean, IsEnum, IsNotEmpty, IsOptional, IsString } from "cl
 
 
 export class CreateTaskDto {
-    
     @IsString()
     @IsNotEmpty()
     task: string | null;

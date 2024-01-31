@@ -4,8 +4,10 @@ import { AuthModule } from './modules/auth/auth.module';
 import { TasksModule } from './modules/tasks/tasks.module';
 import { CommentsModule } from './modules/comments/comments.module';
 import { CardsModule } from './modules/cards/cards.module';
+import { ClientModule } from './modules/client/client.module';
+import { ResponsibleModule } from './modules/responsible/responsible.module';
 
 @Module({
-  imports: [UsersModule, AuthModule, TasksModule, CommentsModule, CardsModule],
+  imports: [UsersModule, AuthModule, TasksModule, CommentsModule, CardsModule, ClientModule, ResponsibleModule],
 })
 export class AppModule {}

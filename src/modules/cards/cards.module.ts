@@ -6,7 +6,7 @@ import { CardsController } from './cards.controller';
 import { CardsRepository } from './repositories/cards.repository';
 
 @Module({
-  controllers: [CardsController],
+  controllers: [CardsController], 
   providers: [
     CardsService,
     PrismaService,

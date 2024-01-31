@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,20 +8,20 @@ datasource db {
 }
 
 model User {
-  id          String       @id
-  name        String
-  email       String       @unique
-  password    String
-  function    String[]
-  isAdmin     Boolean
-  cards       Cards[]
-  comments    Comment[]
+  id       String    @id
+  name     String
+  email    String    @unique
+  password String
+  function String[]
+  isAdmin  Boolean
+  cards    Cards[]
+  comments Comment[]
 
   @@map("users")
 }
 
 model Cards {
-  id          String  @id
+  id          String   @id
   title       String
   description String?
   solution    String?
@@ -41,25 +40,57 @@ model Cards {
 }
 
 model Task {
-  id           String     @id
-  task         String
-  completed    Boolean
-  createdAt    String
-  updatedAt    String
-  suportCard   Cards @relation(fields: [cardsId], references: [id])
-  cardsId      String
+  id         String  @id
+  task       String
+  completed  Boolean
+  createdAt  String
+  updatedAt  String
+  suportCard Cards   @relation(fields: [cardsId], references: [id])
+  cardsId    String
 
   @@map("tasks")
 }
 
 model Comment {
-  id        String @id
+  id        String  @id
   comment   String
   createdAt String
   updatedAt String
   priority  String?
-  user      User   @relation(fields: [userId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
   userId    String
 
   @@map("comments")
+}
+
+model Client {
+  id            String        @id
+  codigo        String
+  companyName   String
+  cnpj          String        @unique
+  businessPhone String
+  businessEmail String
+  comment       String
+  cep           String
+  state         String
+  city          String
+  street        String
+  neighborhood  String
+  number        String
+  responsibles  Responsible[]
+
+  @@map("client")
+}
+
+model Responsible {
+  id       String  @id
+  name     String
+  function String
+  email    String
+  phone    String
+  clientId String?
+
+  client Client? @relation(fields: [clientId], references: [id])
+
+  @@map("responsible")
 }
