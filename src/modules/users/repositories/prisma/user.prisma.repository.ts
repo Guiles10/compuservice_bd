@@ -14,9 +14,6 @@ export class UserPrismaRepository implements UsersRepository {
 
     async create(data: CreateUserDto): Promise<User> {
         const user = new User()
-        if(!data.isAdmin){
-            data.isAdmin = false
-        }
         Object.assign(user, {
            ...data,
         })
@@ -43,7 +40,7 @@ export class UserPrismaRepository implements UsersRepository {
         return user
     }
 
-    async update(id: string, data: UpdateUserDto): Promise<User> {
+    async update(id: string, data: UpdateUserDto): Promise<any> {
         const userIndex = await this.prisma.user.update({
             where: {id},
             data: {...data}
