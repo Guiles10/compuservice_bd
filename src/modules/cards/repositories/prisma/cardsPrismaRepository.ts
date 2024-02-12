@@ -26,7 +26,7 @@ export class CardsPrismaRepository implements CardsRepository {
     }
 
     async findAll(): Promise<Cards[]> {
-        const supCards = await this.prisma.cards.findMany({
+        const card = await this.prisma.cards.findMany({
             include: {
                 tasks: true,
                 user: {
@@ -41,14 +41,13 @@ export class CardsPrismaRepository implements CardsRepository {
             },
         });
 
-        return supCards;
+        return card;
     }
 
     async findOne(id: string): Promise<Cards> {
         const supCard = await this.prisma.cards.findUnique({
             where: { id },
             include: {
-                tasks: true,
                 user: {
                     select: {
                         id: true,

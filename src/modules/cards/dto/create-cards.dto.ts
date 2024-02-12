@@ -45,5 +45,9 @@ export class CreateCardsDto {
   @IsArray()
   @IsNotEmpty({ message: "Escolha pelo menos uma atividade" }) 
   @IsIn(Object.values(UserFunction), { each: true }) 
-  type: UserFunction[]; 
+  type: UserFunction[];
+  
+  @IsArray()
+  @IsOptional()
+  clients: string[];
 }

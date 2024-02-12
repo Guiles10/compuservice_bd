@@ -32,6 +32,8 @@ model Cards {
   deleteAt    String?
   tasks       Task[]
   type        String[]
+  clients     String[]
+
 
   user   User   @relation(fields: [userId], references: [id])
   userId String
@@ -45,7 +47,7 @@ model Task {
   completed  Boolean
   createdAt  String
   updatedAt  String
-  suportCard Cards   @relation(fields: [cardsId], references: [id])
+  card Cards   @relation(fields: [cardsId], references: [id])
   cardsId    String
 
   @@map("tasks")
