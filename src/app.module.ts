@@ -6,8 +6,9 @@ import { CommentsModule } from './modules/comments/comments.module';
 import { CardsModule } from './modules/cards/cards.module';
 import { ClientModule } from './modules/client/client.module';
 import { ResponsibleModule } from './modules/responsible/responsible.module';
+import { UploadModule } from './modules/upload/upload.module';
 
 @Module({
-  imports: [UsersModule, AuthModule, TasksModule, CommentsModule, CardsModule, ClientModule, ResponsibleModule],
+  imports: [UsersModule, AuthModule, TasksModule, CommentsModule, CardsModule, ClientModule, ResponsibleModule, UploadModule],
 })
 export class AppModule {}

@@ -13,6 +13,7 @@ export class Cards {
   deleteAt:     string | null;
   userId:       string;
   type:         string[]
+  clients:      string[]
 
   constructor() {
     this.id = randomUUID();

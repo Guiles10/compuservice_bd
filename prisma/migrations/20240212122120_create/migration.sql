@@ -22,6 +22,7 @@ CREATE TABLE "cards" (
     "updatedAt" TEXT,
     "deleteAt" TEXT,
     "type" TEXT[],
+    "clients" TEXT[],
     "userId" TEXT NOT NULL,
 
     CONSTRAINT "cards_pkey" PRIMARY KEY ("id")
@@ -51,8 +52,42 @@ CREATE TABLE "comments" (
     CONSTRAINT "comments_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "client" (
+    "id" TEXT NOT NULL,
+    "codigo" TEXT NOT NULL,
+    "companyName" TEXT NOT NULL,
+    "cnpj" TEXT NOT NULL,
+    "businessPhone" TEXT NOT NULL,
+    "businessEmail" TEXT NOT NULL,
+    "comment" TEXT NOT NULL,
+    "cep" TEXT NOT NULL,
+    "state" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
+    "street" TEXT NOT NULL,
+    "neighborhood" TEXT NOT NULL,
+    "number" TEXT NOT NULL,
+
+    CONSTRAINT "client_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "responsible" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "function" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "phone" TEXT NOT NULL,
+    "clientId" TEXT,
+
+    CONSTRAINT "responsible_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "client_cnpj_key" ON "client"("cnpj");
 
 -- AddForeignKey
 ALTER TABLE "cards" ADD CONSTRAINT "cards_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -62,3 +97,6 @@ ALTER TABLE "tasks" ADD CONSTRAINT "tasks_cardsId_fkey" FOREIGN KEY ("cardsId") 
 
 -- AddForeignKey
 ALTER TABLE "comments" ADD CONSTRAINT "comments_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "responsible" ADD CONSTRAINT "responsible_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "client"("id") ON DELETE SET NULL ON UPDATE CASCADE;

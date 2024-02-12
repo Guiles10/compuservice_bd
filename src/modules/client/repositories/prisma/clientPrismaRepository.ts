@@ -12,6 +12,13 @@ export class ClientPrismaRepository implements ClientRepository {
     constructor(private prisma: PrismaService){} 
 
     async create(data: CreateClientDto):Promise<Client> {
+        const existingClient = await this.prisma.client.findUnique({
+            where: { cnpj: data.cnpj },
+          });
+          
+        if (existingClient) {
+            throw new Error('Cliente com este CNPJ já existe.');
+        }
         const client = new Client()
         Object.assign(client, {
             ...data,
