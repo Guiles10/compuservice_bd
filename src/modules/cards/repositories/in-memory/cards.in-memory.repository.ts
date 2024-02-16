@@ -51,8 +51,6 @@ export class CardsInMemoryRepository implements CardsRepository {
     }
 
     async deleteFileFromCard(cardId: string, fileName: string): Promise<any> {
-        console.log(cardId)
-        console.log(fileName)
        
       }
 }

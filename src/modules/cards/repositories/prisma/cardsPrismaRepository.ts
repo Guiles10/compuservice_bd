@@ -67,7 +67,6 @@ export class CardsPrismaRepository implements CardsRepository {
     }
 
     async update(id: string, data: UpdateCardsDto): Promise<Cards> {
-        console.log(data)
         const supCardIndex = await this.prisma.cards.update({
             where: { id },
             data: {
@@ -106,7 +105,7 @@ export class CardsPrismaRepository implements CardsRepository {
         try {
             const card = await this.prisma.cards.findUnique({
                 where: { id: cardId },
-                include: { files: true } // Certifique-se de incluir os arquivos associados ao cartão
+                include: { files: true }
             });
     
             if (!card) {
