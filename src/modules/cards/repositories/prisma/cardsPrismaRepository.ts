@@ -29,6 +29,7 @@ export class CardsPrismaRepository implements CardsRepository {
         const card = await this.prisma.cards.findMany({
             include: {
                 tasks: true,
+                files: true,
                 user: {
                     select: {
                         id: true,
@@ -48,6 +49,8 @@ export class CardsPrismaRepository implements CardsRepository {
         const supCard = await this.prisma.cards.findUnique({
             where: { id },
             include: {
+                tasks: true,
+                files: true,
                 user: {
                     select: {
                         id: true,
@@ -64,7 +67,7 @@ export class CardsPrismaRepository implements CardsRepository {
     }
 
     async update(id: string, data: UpdateCardsDto): Promise<Cards> {
-
+        console.log(data)
         const supCardIndex = await this.prisma.cards.update({
             where: { id },
             data: {
@@ -73,6 +76,7 @@ export class CardsPrismaRepository implements CardsRepository {
             },
             include: {
                 tasks: true,
+                files: true,
                 user: {
                     select: {
                         id: true,
@@ -97,4 +101,27 @@ export class CardsPrismaRepository implements CardsRepository {
             });
         });
     }
+
+    async deleteFileFromCard(cardId: string, fileName: string): Promise<any> {
+        try {
+            const card = await this.prisma.cards.findUnique({
+                where: { id: cardId },
+                include: { files: true } // Certifique-se de incluir os arquivos associados ao cartão
+            });
+    
+            if (!card) {
+                throw new Error(`Cartão com ID ${cardId} não encontrado.`);
+            }
+    
+            const deletedFile = card.files.filter(file => file.filename == fileName);
+            const idFile = deletedFile[0].id
+
+            await this.prisma.file.delete({
+                where: { id: idFile }
+            });
+
+        } catch (error) {
+          throw new Error(`Erro ao excluir arquivo do cartão: ${error.message}`);
+        }
+      }
 }

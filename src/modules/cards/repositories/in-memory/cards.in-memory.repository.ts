@@ -50,4 +50,9 @@ export class CardsInMemoryRepository implements CardsRepository {
         this.dataBaseCard.splice(userIndex, 1)
     }
 
+    async deleteFileFromCard(cardId: string, fileName: string): Promise<any> {
+        console.log(cardId)
+        console.log(fileName)
+       
+      }
 }

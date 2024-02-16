@@ -37,4 +37,13 @@ export class CardsController {
   remove(@Param('id') id: string) {
     return this.cardService.remove(id);
   }
+
+  @HttpCode(204)
+  @Delete('/:cardId/:filename')
+  async deleteFileFromCard(
+      @Param('cardId') cardId: string,
+      @Param('filename') fileName: string
+  ) {
+      return await this.cardService.deleteFileFromCard(cardId, fileName);
+  }
 }

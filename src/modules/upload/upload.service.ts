@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { createClient } from '@supabase/supabase-js';
-import path from 'path';
+import { PrismaService } from 'src/database/prisma.service';
 
 
 @Injectable()
@@ -16,6 +16,7 @@ export class UploadService {
             }
         });
     }
+
 
     async upload(file: Express.Multer.File) {
         const fileExtension = file.originalname.split('.').pop()?.toLowerCase();
@@ -34,16 +35,26 @@ export class UploadService {
         if (error) {
             throw new Error(`Erro ao fazer upload do arquivo: ${error.message}`);
         }
-    console.log(data)
-        return data;
+        return data
+        // Crie uma entrada na tabela File com as informações relevantes do arquivo
+        // const createdFile = await this.prisma.files.create({
+        //     data: {
+        //         filename: file.originalname,
+        //         url: data?.Key, // Armazene a chave do arquivo retornada pelo Supabase
+        //         createdAt: new Date().toISOString(),
+        //         // Adicione qualquer outra informação relevante que você queira armazenar
+        //     }
+        // });
+
+        // return createdFile;
     }
+  
 
     async getImagemUrl(nomeDoArquivo: string): Promise<any | null> {
         const { data, error } = await this.supabase
-          .storage
-          .from('compuservice')
-        //   .getPublicUrl(nomeDoArquivo);
-        .createSignedUrl(nomeDoArquivo, 60); // token expira em 1 minuto (opcional)
+            .storage
+            .from('compuservice')
+            .createSignedUrl(nomeDoArquivo, 60);
 
         
         if (error) {
