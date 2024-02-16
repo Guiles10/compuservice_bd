@@ -32,7 +32,8 @@ model Cards {
   deleteAt    String?
   tasks       Task[]
   type        String[]
-  clients     String[]
+  clients     String[] 
+  files       File[]
 
 
   user   User   @relation(fields: [userId], references: [id])
@@ -85,7 +86,7 @@ model Client {
 }
 
 model Responsible {
-  id       String  @id
+  id       String @id
   name     String
   function String
   email    String
@@ -95,4 +96,16 @@ model Responsible {
   client Client? @relation(fields: [clientId], references: [id])
 
   @@map("responsible")
+}
+
+model File {
+  id        String  @id
+  filename  String  @unique
+  url       String
+  createdAt String
+  updatedAt String
+  card      Cards    @relation(fields: [cardId], references: [id])
+  cardId    String
+
+  @@map("file")
 }

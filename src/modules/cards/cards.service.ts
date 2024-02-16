@@ -41,4 +41,8 @@ export class CardsService {
     await this.cardRepository.delete(id)
     return
   }
+
+  async deleteFileFromCard(cardId: string, fileName: string) {
+    return await this.cardRepository.deleteFileFromCard(cardId, fileName);
+  }
 }
