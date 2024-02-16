@@ -7,6 +7,7 @@ export abstract class CardsRepository {
     abstract findAll(): Promise<Cards[]> | undefined | Cards[];
     abstract findOne(id: string): Promise<Cards> | Cards;
     abstract update(id: string, data: UpdateCardsDto): Promise<Cards> | Cards;
-    abstract delete(id: string): Promise<void> | void; 
+    abstract delete(id: string): Promise<void> | void;
+    abstract deleteFileFromCard(cardId: string, fileName: string): Promise<void> | void;
 }
 

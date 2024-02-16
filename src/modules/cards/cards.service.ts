@@ -1,7 +1,7 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { CardsRepository } from './repositories/cards.repository';
 import { UpdateCardsDto } from './dto/update-cards.dto';
-import { CreateCardsDto } from './dto/create-cards.dto';
+import { CreateCardsDto } from './dto/create-cards.dto'; 
 
 @Injectable()
 export class CardsService {
@@ -40,5 +40,9 @@ export class CardsService {
     }
     await this.cardRepository.delete(id)
     return
+  }
+
+  async deleteFileFromCard(cardId: string, fileName: string) {
+    return await this.cardRepository.deleteFileFromCard(cardId, fileName);
   }
 }

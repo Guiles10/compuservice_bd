@@ -26,9 +26,10 @@ export class CardsPrismaRepository implements CardsRepository {
     }
 
     async findAll(): Promise<Cards[]> {
-        const supCards = await this.prisma.cards.findMany({
+        const card = await this.prisma.cards.findMany({
             include: {
                 tasks: true,
+                files: true,
                 user: {
                     select: {
                         id: true,
@@ -41,7 +42,7 @@ export class CardsPrismaRepository implements CardsRepository {
             },
         });
 
-        return supCards;
+        return card;
     }
 
     async findOne(id: string): Promise<Cards> {
@@ -49,6 +50,7 @@ export class CardsPrismaRepository implements CardsRepository {
             where: { id },
             include: {
                 tasks: true,
+                files: true,
                 user: {
                     select: {
                         id: true,
@@ -65,7 +67,6 @@ export class CardsPrismaRepository implements CardsRepository {
     }
 
     async update(id: string, data: UpdateCardsDto): Promise<Cards> {
-
         const supCardIndex = await this.prisma.cards.update({
             where: { id },
             data: {
@@ -74,6 +75,7 @@ export class CardsPrismaRepository implements CardsRepository {
             },
             include: {
                 tasks: true,
+                files: true,
                 user: {
                     select: {
                         id: true,
@@ -98,4 +100,27 @@ export class CardsPrismaRepository implements CardsRepository {
             });
         });
     }
+
+    async deleteFileFromCard(cardId: string, fileName: string): Promise<any> {
+        try {
+            const card = await this.prisma.cards.findUnique({
+                where: { id: cardId },
+                include: { files: true }
+            });
+    
+            if (!card) {
+                throw new Error(`Cartão com ID ${cardId} não encontrado.`);
+            }
+    
+            const deletedFile = card.files.filter(file => file.filename == fileName);
+            const idFile = deletedFile[0].id
+
+            await this.prisma.file.delete({
+                where: { id: idFile }
+            });
+
+        } catch (error) {
+          throw new Error(`Erro ao excluir arquivo do cartão: ${error.message}`);
+        }
+      }
 }
