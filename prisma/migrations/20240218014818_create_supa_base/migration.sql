@@ -83,11 +83,26 @@ CREATE TABLE "responsible" (
     CONSTRAINT "responsible_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "file" (
+    "id" TEXT NOT NULL,
+    "filename" TEXT NOT NULL,
+    "url" TEXT NOT NULL,
+    "createdAt" TEXT NOT NULL,
+    "updatedAt" TEXT NOT NULL,
+    "cardId" TEXT NOT NULL,
+
+    CONSTRAINT "file_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "client_cnpj_key" ON "client"("cnpj");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "file_filename_key" ON "file"("filename");
 
 -- AddForeignKey
 ALTER TABLE "cards" ADD CONSTRAINT "cards_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -100,3 +115,6 @@ ALTER TABLE "comments" ADD CONSTRAINT "comments_userId_fkey" FOREIGN KEY ("userI
 
 -- AddForeignKey
 ALTER TABLE "responsible" ADD CONSTRAINT "responsible_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "client"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "file" ADD CONSTRAINT "file_cardId_fkey" FOREIGN KEY ("cardId") REFERENCES "cards"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
