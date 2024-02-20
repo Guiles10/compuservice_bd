@@ -47,6 +47,7 @@ export class CardsInMemoryRepository implements ClientRepository {
     delete(id: string): void | Promise<void> {
         const userIndex = this.dataBaseClient.findIndex((user) => user.id == id)
         this.dataBaseClient.splice(userIndex, 1)
+        //Teste 
     }
 
 }
