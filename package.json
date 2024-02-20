@@ -20,8 +20,10 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prisma:generate": "prisma generate",
     
-    "vercel-build": "npm run build && npm run prisma:migrate",
-    "prisma:migrate": "prisma migrate deploy --preview-feature"
+
+      "vercel-build": "npm install && npm run build && npm run prisma:migrate",
+      "prisma:migrate": "prisma migrate deploy --preview-feature"
+    
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
