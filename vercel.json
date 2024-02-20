@@ -14,7 +14,7 @@
     "env": {
         "DATABASE_URL":"postgres://postgres.cfekzhonhfuhwbiecyod:N5xxiMn2AFq7wjjf@aws-0-us-west-1.pooler.supabase.com:5432/postgres",
        
-        "SECRET_KEY": "Teste",
+        "SECRET_KEY": "Chave_Secreta",
         
         "SUPABASE_URL": "https://cfekzhonhfuhwbiecyod.supabase.co",
         "SUPABASE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmZWt6aG9uaGZ1aHdiaWVjeW9kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDc0MDA3ODAsImV4cCI6MjAyMjk3Njc4MH0.ygvsORi906JwG4mFJ2mFNDWr3zOxft0VPA5Dsm3SVmk"
