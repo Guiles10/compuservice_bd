@@ -12,7 +12,7 @@ export class FilePrismaRepository implements FileRepository {
   
     constructor(private prisma: PrismaService) {
         const supabaseUrl = process.env.SUPABASE_URL;
-        const supabaseKey = process.env.SUPABASE_KEY;
+        const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
         this.supabase = createClient(supabaseUrl, supabaseKey, {
             auth: {
                 persistSession: false
