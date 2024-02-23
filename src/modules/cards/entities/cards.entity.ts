@@ -14,6 +14,7 @@ export class Cards {
   userId:       string;
   type:         string[]
   clients:      string[]
+  worker:      string[]
 
   constructor() {
     this.id = randomUUID();
