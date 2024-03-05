@@ -4,6 +4,7 @@ import * as moment from 'moment';
 export class Comments {
   readonly id: string;
   comment: string;
+  title: string;
   priority: string;
   readonly createdAt: string;
   readonly updatedAt: string;

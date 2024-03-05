@@ -5,6 +5,7 @@ export class Client {
     readonly id:    string;
     codigo:         string;
     companyName:    string;
+    socialName:     string;
     cnpj:           string | null;
     businessPhone:  string;
     businessEmail:  string;
