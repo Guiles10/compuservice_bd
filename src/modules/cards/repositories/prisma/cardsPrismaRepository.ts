@@ -17,12 +17,20 @@ export class CardsPrismaRepository implements CardsRepository {
         const card = new Cards()
         Object.assign(card, {
             ...data,
-            status: data.status || "A Fazer"
+            status: "A Fazer"
         })
         const newCard = await this.prisma.cards.create({
             data: { ...card, userId }
         })
+
         return plainToInstance(Cards, newCard)
+    }
+
+    async findByCardTitle (title: string): Promise<any> {
+        const cardTitle = await this.prisma.cards.findUnique({
+            where: {title}
+        })
+        return cardTitle
     }
 
     async findAll(): Promise<Cards[]> {

@@ -23,6 +23,13 @@ export class CommentsPrismaRepository implements CommentsRepository {
         return newComment
     }
 
+    async findByCommentTitle(title: string): Promise<any> {
+        const clientCompName = await this.prisma.comment.findUnique({
+            where: {title}
+        })
+        return clientCompName
+    }
+
     async findAll(): Promise<any> {
         const comments = await this.prisma.comment.findMany({
             include: {
