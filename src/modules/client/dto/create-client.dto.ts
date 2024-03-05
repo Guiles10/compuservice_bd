@@ -11,6 +11,10 @@ export class CreateClientDto {
 
     @IsString()
     @IsNotEmpty()
+    socialName: string;
+
+    @IsString()
+    @IsNotEmpty()
     cnpj: string;
 
     @IsString()

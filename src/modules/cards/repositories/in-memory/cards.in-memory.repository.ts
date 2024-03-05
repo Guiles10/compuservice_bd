@@ -20,6 +20,11 @@ export class CardsInMemoryRepository implements CardsRepository {
         return newCard
     }
 
+    async findByCardTitle (title: string): Promise<any> {
+
+        return
+    }
+
     findAll(): any | Promise<any> {
         return this.dataBaseCard
     }

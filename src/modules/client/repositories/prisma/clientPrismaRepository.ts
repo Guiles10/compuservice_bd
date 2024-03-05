@@ -12,13 +12,6 @@ export class ClientPrismaRepository implements ClientRepository {
     constructor(private prisma: PrismaService){} 
 
     async create(data: CreateClientDto):Promise<Client> {
-        const existingClient = await this.prisma.client.findUnique({
-            where: { cnpj: data.cnpj },
-          });
-          
-        if (existingClient) {
-            throw new Error('Cliente com este CNPJ já existe.');
-        }
         const client = new Client()
         Object.assign(client, {
             ...data,
@@ -27,6 +20,25 @@ export class ClientPrismaRepository implements ClientRepository {
             data: { ...client }
         })
         return newClient
+    }
+
+    async findByClientCNPJ(cnpj: string): Promise<any> {
+        const clientCNPJ = await this.prisma.client.findUnique({
+            where: {cnpj}
+        })
+        return clientCNPJ
+    }
+    async findByClientCompanyName(companyName: string): Promise<any> {
+        const clientCompName = await this.prisma.client.findUnique({
+            where: {companyName}
+        })
+        return clientCompName
+    }
+    async findByClientCodigo(codigo: string): Promise<any> {
+        const clientCod = await this.prisma.client.findUnique({
+            where: {codigo}
+        })
+        return clientCod
     }
 
     async findAll(): Promise<Client[]> {
@@ -51,14 +63,23 @@ export class ClientPrismaRepository implements ClientRepository {
     }
 
     async update(id: string, data: UpdateClientDto): Promise<Client> {
-        const clientIndex = await this.prisma.client.update({
+        const existingClient = await this.prisma.client.findUnique({
+            where: { id },
+        });
+    
+        if (!existingClient) {
+            throw new Error("Cliente não encontrado");
+        }
+
+        const updatedClient = await this.prisma.client.update({
             where: { id },
             data: { ...data },
             include: {
                 responsibles: true,
             },
         });
-        return clientIndex;
+    
+        return updatedClient;
     }
 
     async delete(id: string): Promise<void> {

@@ -14,6 +14,10 @@ export class CreateCommentsDto {
   @IsNotEmpty()
   comment: string;
 
+  @IsString()
+  @IsNotEmpty()
+  title: string;
+
   @IsEnum(CommentPriority, { message: "Prioridade inválida" })
   @IsOptional()
   priority: CommentPriority | null;
