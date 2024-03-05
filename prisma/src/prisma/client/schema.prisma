@@ -1,0 +1,115 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "./src/prisma/client"
+}
+
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String    @id
+  name     String    @unique
+  email    String    @unique
+  password String
+  function String[]
+  isAdmin  Boolean
+  cards    Cards[]
+  comments Comment[]
+
+  @@map("users")
+}
+
+model Cards {
+  id          String   @id
+  title       String   @unique
+  description String?
+  solution    String?
+  priority    String?
+  status      String?
+  createdAt   String
+  updatedAt   String?
+  deleteAt    String?
+  tasks       Task[]
+  type        String[]
+  clients     String[] 
+  worker      String[] 
+  files       File[]
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@map("cards")
+}
+
+model Task {
+  id         String  @id
+  task       String
+  completed  Boolean
+  createdAt  String
+  updatedAt  String
+  card Cards   @relation(fields: [cardsId], references: [id])
+  cardsId    String
+
+  @@map("tasks")
+}
+
+model Comment {
+  id        String  @id
+  title     String  @unique
+  comment   String
+  createdAt String
+  updatedAt String
+  priority  String?
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
+
+  @@map("comments")
+}
+
+model Client {
+  id            String        @id
+  codigo        String        @unique
+  companyName   String        @unique
+  socialName    String      
+  cnpj          String        @unique
+  businessPhone String
+  businessEmail String
+  comment       String
+  cep           String
+  state         String
+  city          String
+  street        String
+  neighborhood  String
+  number        String
+  responsibles  Responsible[]
+
+  @@map("client")
+}
+
+model Responsible {
+  id       String @id
+  name     String
+  function String
+  email    String
+  phone    String
+  clientId String?
+
+  client Client? @relation(fields: [clientId], references: [id])
+
+  @@map("responsible")
+}
+
+model File {
+  id        String  @id
+  filename  String  @unique
+  url       String
+  createdAt String
+  updatedAt String
+  card      Cards    @relation(fields: [cardId], references: [id])
+  cardId    String
+
+  @@map("file")
+}
