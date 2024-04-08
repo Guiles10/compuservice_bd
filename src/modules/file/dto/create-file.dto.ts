@@ -3,7 +3,7 @@ import { IsOptional, IsString } from "class-validator";
 export class CreateFileDto {
     @IsString()
     @IsOptional()
-    filename: string | null;
+    fileName: string | null;
   
     @IsString()
     @IsOptional()

@@ -120,7 +120,7 @@ export class CardsPrismaRepository implements CardsRepository {
                 throw new Error(`Cartão com ID ${cardId} não encontrado.`);
             }
     
-            const deletedFile = card.files.filter(file => file.filename == fileName);
+            const deletedFile = card.files.filter(file => file.fileName == fileName);
             const idFile = deletedFile[0].id
 
             await this.prisma.file.delete({
