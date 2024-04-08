@@ -7,8 +7,9 @@ export class Client {
     companyName:    string;
     socialName:     string;
     cnpj:           string | null;
-    businessPhone:  string;
-    businessEmail:  string;
+    businessPhone_1:  string;
+    businessPhone_2:  string;
+    businessEmail:  string | null;
     comment:        string | null;
     cep:            string | null;
     state:          string | null;
@@ -19,5 +20,7 @@ export class Client {
 
     constructor() {
         this.id = randomUUID();
+        this.businessPhone_1 = null;
+        this.businessPhone_2 = null;
     }
 }

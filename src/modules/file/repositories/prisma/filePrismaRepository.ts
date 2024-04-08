@@ -55,7 +55,7 @@ export class FilePrismaRepository implements FileRepository {
         })
     
         const existingFile = await this.prisma.file.findUnique({
-            where: { filename: file.originalname }
+            where: { fileName: file.originalname }
         });
         
         if (existingFile) {
