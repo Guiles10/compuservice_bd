@@ -4,7 +4,7 @@ import * as moment from 'moment';
 
 export class File {
     readonly id:    string
-    filename:       string
+    fileName:       string
     url:            string
     cardId:         string
     readonly updatedAt:     string;

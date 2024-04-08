@@ -18,8 +18,12 @@ export class CreateClientDto {
     cnpj: string;
 
     @IsString()
-    @IsNotEmpty()
-    businessPhone: string;
+    @IsOptional()
+    businessPhone_1: string | null;
+
+    @IsString()
+    @IsOptional()
+    businessPhone_2: string | null;
 
     @IsString()
     @IsOptional()
