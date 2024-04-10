@@ -1,29 +1,26 @@
 import { randomUUID } from "crypto";
+import * as moment from 'moment';
 
 export class Client {
-    readonly id: string;
-    codigo: string | null;
-    companyName: string | null;
-    socialName: string | null;
-    cnpj: string | null;
-    businessPhone_1: string | null;
-    businessPhone_2: string | null;
-    businessEmail: string | null;
-    comment: string | null;
-    cep: string | null;
-    state: string | null;
-    city: string | null;
-    street: string | null;
-    neighborhood: string | null;
-    number: string | null;
+    readonly id:    string
+    codigo:         string | null;
+    companyName:    string | null;
+    socialName:     string | null;
+    cnpj:           string | null;
+    businessPhone_1:  string | null;
+    businessPhone_2:  string | null;
+    businessEmail:  string | null;
+    comment:        string | null;
+    cep:            string | null;
+    state:          string | null;
+    city:           string | null;
+    street:         string | null;
+    neighborhood:   string | null;
+    number:         string | null;
 
     constructor(data?: Partial<Client>) {
-        this.id = data?.id || randomUUID();
-
-        this.codigo = data?.codigo || null;
-        this.companyName = data?.companyName || null;
+        this.id = randomUUID();
         this.socialName = data?.socialName || null;
-        this.cnpj = data?.cnpj || null;
         this.businessPhone_1 = data?.businessPhone_1 || null;
         this.businessPhone_2 = data?.businessPhone_2 || null;
         this.businessEmail = data?.businessEmail || null;

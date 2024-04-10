@@ -1,0 +1,22 @@
+-- AlterTable
+ALTER TABLE "comments" ALTER COLUMN "comment" DROP NOT NULL,
+ALTER COLUMN "createdAt" DROP NOT NULL,
+ALTER COLUMN "updatedAt" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "file" ALTER COLUMN "url" DROP NOT NULL,
+ALTER COLUMN "updatedAt" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "responsible" ALTER COLUMN "name" DROP NOT NULL,
+ALTER COLUMN "function" DROP NOT NULL,
+ALTER COLUMN "email" DROP NOT NULL,
+ALTER COLUMN "phone" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "tasks" ALTER COLUMN "task" DROP NOT NULL,
+ALTER COLUMN "createdAt" DROP NOT NULL,
+ALTER COLUMN "updatedAt" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "users" ALTER COLUMN "password" DROP NOT NULL;
