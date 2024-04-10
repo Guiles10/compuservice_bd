@@ -10,9 +10,9 @@ export class Comments {
   readonly updatedAt: string;
   userId: string;
 
-  constructor() {
-    this.id = randomUUID();
-    this.createdAt = moment().format('DD/MM/YYYY HH:mm:ss');
-    this.updatedAt = moment().format('DD/MM/YYYY HH:mm:ss');
+  constructor(data?: Partial<Comments>) {
+    this.createdAt = data?.createdAt || moment().format('DD/MM/YYYY HH:mm:ss');
+    this.updatedAt = data?.updatedAt || moment().format('DD/MM/YYYY HH:mm:ss');
+
   }
 }

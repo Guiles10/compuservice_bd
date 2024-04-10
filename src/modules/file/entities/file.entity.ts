@@ -1,18 +1,18 @@
 import { randomUUID } from "crypto";
-import * as moment from 'moment';
 
+export class Responsible {
+    readonly id: string;
+    name: string;
+    position: string | null;
+    email: string | null;
+    phone: string | null;
+    clientId?: string;
 
-export class File {
-    readonly id:    string
-    fileName:       string
-    url:            string
-    cardId:         string
-    readonly updatedAt:     string;
-    readonly createdAt:     string;
+    constructor(data?: Partial<Responsible>) {
+        this.id = data?.id || randomUUID();
+        this.position = data?.position || null;
+        this.email = data?.email || null;
+        this.phone = data?.phone || null;
 
-    constructor() {
-        this.id = randomUUID();
-        this.createdAt = moment().format('DD/MM/YYYY HH:mm:ss');
-        this.updatedAt = moment().format('DD/MM/YYYY HH:mm:ss');
     }
 }
