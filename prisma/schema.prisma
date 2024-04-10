@@ -74,7 +74,7 @@ model Client {
   socialName      String
   cnpj            String        @unique
   businessPhone_1 String
-  businessPhone_2 String       
+  businessPhone_2 String    
   businessEmail   String
   comment         String
   cep             String

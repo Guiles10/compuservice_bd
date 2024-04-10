@@ -1,26 +1,38 @@
 import { randomUUID } from "crypto";
-import * as moment from 'moment';
 
 export class Client {
-    readonly id:    string;
-    codigo:         string;
-    companyName:    string;
-    socialName:     string;
-    cnpj:           string | null;
-    businessPhone_1:  string;
-    businessPhone_2:  string;
-    businessEmail:  string | null;
-    comment:        string | null;
-    cep:            string | null;
-    state:          string | null;
-    city:           string | null;
-    street:         string | null;
-    neighborhood:   string | null;
-    number:         string | null;
+    readonly id: string;
+    codigo: string | null;
+    companyName: string | null;
+    socialName: string | null;
+    cnpj: string | null;
+    businessPhone_1: string | null;
+    businessPhone_2: string | null;
+    businessEmail: string | null;
+    comment: string | null;
+    cep: string | null;
+    state: string | null;
+    city: string | null;
+    street: string | null;
+    neighborhood: string | null;
+    number: string | null;
 
-    constructor() {
-        this.id = randomUUID();
-        this.businessPhone_1 = null;
-        this.businessPhone_2 = null;
+    constructor(data?: Partial<Client>) {
+        this.id = data?.id || randomUUID();
+
+        this.codigo = data?.codigo || null;
+        this.companyName = data?.companyName || null;
+        this.socialName = data?.socialName || null;
+        this.cnpj = data?.cnpj || null;
+        this.businessPhone_1 = data?.businessPhone_1 || null;
+        this.businessPhone_2 = data?.businessPhone_2 || null;
+        this.businessEmail = data?.businessEmail || null;
+        this.comment = data?.comment || null;
+        this.cep = data?.cep || null;
+        this.state = data?.state || null;
+        this.city = data?.city || null;
+        this.street = data?.street || null;
+        this.neighborhood = data?.neighborhood || null;
+        this.number = data?.number || null;
     }
 }
