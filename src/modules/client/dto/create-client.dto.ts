@@ -19,11 +19,11 @@ export class CreateClientDto {
 
     @IsString()
     @IsOptional()
-    businessPhone_1: string;
+    businessPhone_1: string | null;
 
     @IsString()
     @IsOptional()
-    businessPhone_2: string;
+    businessPhone_2: string | null;
 
     @IsString()
     @IsOptional()
