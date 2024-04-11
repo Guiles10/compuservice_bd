@@ -14,6 +14,7 @@ export class CommentsPrismaRepository implements CommentsRepository {
 
     async create(data: CreateCommentsDto, userId: string): Promise<Comments> {
         const comment = new Comments()
+        console.log(data)
         Object.assign(comment, {
             ...data,
         })
