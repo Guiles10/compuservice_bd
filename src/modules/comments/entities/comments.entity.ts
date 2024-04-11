@@ -3,16 +3,15 @@ import * as moment from 'moment';
 
 export class Comments {
   readonly id: string;
-  comment: string;
   title: string;
-  priority: string;
+  comment: string;
+  priority: string | null;
   readonly createdAt: string;
   readonly updatedAt: string;
-  userId: string;
 
-  constructor(data?: Partial<Comments>) {
-    this.createdAt = data?.createdAt || moment().format('DD/MM/YYYY HH:mm:ss');
-    this.updatedAt = data?.updatedAt || moment().format('DD/MM/YYYY HH:mm:ss');
-
+  constructor() {
+    this.id = randomUUID();
+    this.createdAt = moment().format('DD/MM/YYYY HH:mm:ss');
+    this.updatedAt = moment().format('DD/MM/YYYY HH:mm:ss');
   }
 }
