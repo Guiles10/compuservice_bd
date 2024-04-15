@@ -50,7 +50,7 @@ export class FilePrismaRepository implements FileRepository {
     
         const files = new File()
         Object.assign(files, {
-            filename: file.originalname,
+            fileName: file.originalname,
             url: signedUrlData.signedUrl
         })
     
