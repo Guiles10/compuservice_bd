@@ -11,6 +11,9 @@ export class ClientService {
     if (await this.clientRepository.findByClientCNPJ(createClientDto.cnpj)) {
       throw new NotAcceptableException("CNPJ já cadastrado");
     }
+    if (await this.clientRepository.findByClientCNPJ(createClientDto.cnpj)) {
+      throw new NotAcceptableException("CPF já cadastrado");
+    }
     if (await this.clientRepository.findByClientCompanyName(createClientDto.companyName)) {
       throw new NotAcceptableException("Razão Social já cadastrado");
     }
@@ -24,6 +27,9 @@ export class ClientService {
 
   async findByClientCNPJ(cnpj: string) {
     return await this.clientRepository.findByClientCNPJ(cnpj)
+  }
+  async findByClientCPF(CPF: string) {
+    return await this.clientRepository.findByClientCPF(CPF)
   }
   async findByClientCompanyName(companyName: string) {
     return await this.clientRepository.findByClientCompanyName(companyName)

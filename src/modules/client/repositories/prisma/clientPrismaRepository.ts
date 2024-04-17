@@ -28,6 +28,12 @@ export class ClientPrismaRepository implements ClientRepository {
         })
         return clientCNPJ
     }
+    async findByClientCPF(cpf: string): Promise<any> {
+        const clientCPF = await this.prisma.client.findUnique({
+            where: {cpf}
+        })
+        return clientCPF
+    }
     async findByClientCompanyName(companyName: string): Promise<any> {
         const clientCompName = await this.prisma.client.findUnique({
             where: {companyName}
