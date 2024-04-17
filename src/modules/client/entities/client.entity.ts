@@ -7,9 +7,11 @@ export class Client {
     companyName:    string | null;
     socialName:     string | null;
     cnpj:           string | null;
+    cpf:            string | null;
     businessPhone_1:  string | null;
     businessPhone_2:  string | null;
     businessEmail:  string | null;
+    site:           string | null;
     comment:        string | null;
     cep:            string | null;
     state:          string | null;
@@ -21,9 +23,12 @@ export class Client {
     constructor(data?: Partial<Client>) {
         this.id = randomUUID();
         this.socialName = data?.socialName || null;
+        this.cnpj = data?.cnpj || null;
+        this.cpf = data?.cpf || null;
         this.businessPhone_1 = data?.businessPhone_1 || null;
         this.businessPhone_2 = data?.businessPhone_2 || null;
         this.businessEmail = data?.businessEmail || null;
+        this.site = data?.site || null;
         this.comment = data?.comment || null;
         this.cep = data?.cep || null;
         this.state = data?.state || null;

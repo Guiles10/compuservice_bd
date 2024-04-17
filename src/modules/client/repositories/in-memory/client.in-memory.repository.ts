@@ -21,6 +21,8 @@ export class CardsInMemoryRepository implements ClientRepository {
 
     async findByClientCNPJ(cnpj: string): Promise<any> {
     }
+    async findByClientCPF(cpf: string): Promise<any> {
+    }
     async findByClientCompanyName(companyName: string): Promise<any> {
     }
     async findByClientCodigo(codigo: string): Promise<any> {

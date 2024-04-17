@@ -14,20 +14,28 @@ export class CreateClientDto {
     socialName: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     cnpj: string;
 
     @IsString()
     @IsOptional()
-    businessPhone_1: string | null;
+    cpf: string;
 
     @IsString()
     @IsOptional()
-    businessPhone_2: string | null;
+    businessPhone_1: string;
+
+    @IsString()
+    @IsOptional()
+    businessPhone_2: string;
 
     @IsString()
     @IsOptional()
     businessEmail: string;
+
+    @IsString()
+    @IsOptional()
+    site: string;
 
     @IsString()
     @IsOptional()
