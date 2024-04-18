@@ -2,7 +2,7 @@ import { IsArray, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class CreateClientDto {
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     codigo: string;
 
     @IsString()
