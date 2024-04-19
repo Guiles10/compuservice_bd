@@ -3,7 +3,7 @@ import { IsArray, IsNotEmpty, IsOptional, IsString } from "class-validator";
 export class CreateClientDto {
     @IsString()
     @IsOptional()
-    codigo: string;
+    codigo: string | null;
 
     @IsString()
     @IsNotEmpty()
@@ -15,11 +15,11 @@ export class CreateClientDto {
 
     @IsString()
     @IsOptional()
-    cnpj: string;
+    cnpj: string | null;
 
     @IsString()
     @IsOptional()
-    cpf: string;
+    cpf: string | null;
 
     @IsString()
     @IsOptional()
