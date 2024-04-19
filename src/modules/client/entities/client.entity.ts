@@ -4,8 +4,8 @@ import * as moment from 'moment';
 export class Client {
     readonly id:    string
     codigo:         string | null;
-    companyName:    string | null;
-    socialName:     string | null;
+    companyName:    string;
+    socialName:     string;
     cnpj:           string | null;
     cpf:            string | null;
     businessPhone_1:  string | null;
@@ -22,6 +22,7 @@ export class Client {
 
     constructor(data?: Partial<Client>) {
         this.id = randomUUID();
+        this.codigo = data?.codigo || null;
         this.socialName = data?.socialName || null;
         this.cnpj = data?.cnpj || null;
         this.cpf = data?.cpf || null;
