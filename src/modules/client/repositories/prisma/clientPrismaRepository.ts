@@ -5,6 +5,7 @@ import { PrismaService } from 'src/database/prisma.service';
 import { CreateClientDto } from '../../dto/create-client.dto';
 import { Client } from '../../entities/client.entity';
 import { UpdateClientDto } from '../../dto/update-client.dto';
+import { copyFile } from 'fs/promises';
 
 @Injectable()
 export class ClientPrismaRepository implements ClientRepository {
@@ -12,6 +13,7 @@ export class ClientPrismaRepository implements ClientRepository {
     constructor(private prisma: PrismaService){} 
 
     async create(data: CreateClientDto):Promise<Client> {
+        console.log(data)
         const client = new Client()
         Object.assign(client, {
             ...data,
@@ -22,13 +24,19 @@ export class ClientPrismaRepository implements ClientRepository {
         return newClient
     }
 
-    async findByClientCNPJ(cnpj: string): Promise<any> {
+    async findByClientCNPJ(cnpj: string | null): Promise<any> {
+        if (cnpj === undefined) {
+            return null
+        }
         const clientCNPJ = await this.prisma.client.findUnique({
             where: {cnpj}
         })
         return clientCNPJ
     }
-    async findByClientCPF(cpf: string): Promise<any> {
+    async findByClientCPF(cpf: string | null): Promise<any> {
+        if (cpf === undefined) {
+            return null
+        }
         const clientCPF = await this.prisma.client.findUnique({
             where: {cpf}
         })
@@ -40,7 +48,10 @@ export class ClientPrismaRepository implements ClientRepository {
         })
         return clientCompName
     }
-    async findByClientCodigo(codigo: string): Promise<any> {
+    async findByClientCodigo(codigo: string | null): Promise<any> {
+        if (codigo === undefined) {
+            return null
+        }
         const clientCod = await this.prisma.client.findUnique({
             where: {codigo}
         })
