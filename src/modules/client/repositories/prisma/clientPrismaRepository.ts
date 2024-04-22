@@ -12,11 +12,25 @@ export class ClientPrismaRepository implements ClientRepository {
 
     constructor(private prisma: PrismaService){} 
 
-    async create(data: CreateClientDto):Promise<Client> {
-        console.log(data)
+    async create(dataClient: CreateClientDto):Promise<Client> {
+        console.log(dataClient)
+
+        if (dataClient.cpf === "") {
+            dataClient.cpf = null;
+        }
+        if (dataClient.cnpj === "") {
+            dataClient.cnpj = null;
+        }
+        if (dataClient.codigo === "") {
+            dataClient.codigo = null;
+        }
+
+        console.log("Depois")
+        console.log(dataClient)
+        
         const client = new Client()
         Object.assign(client, {
-            ...data,
+            ...dataClient,
         })
         const newClient = await this.prisma.client.create({
             data: { ...client }
