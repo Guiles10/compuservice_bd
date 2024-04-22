@@ -13,8 +13,6 @@ export class ClientPrismaRepository implements ClientRepository {
     constructor(private prisma: PrismaService){} 
 
     async create(dataClient: CreateClientDto):Promise<Client> {
-        console.log(dataClient)
-
         if (dataClient.cpf === "") {
             dataClient.cpf = null;
         }
@@ -25,9 +23,6 @@ export class ClientPrismaRepository implements ClientRepository {
             dataClient.codigo = null;
         }
 
-        console.log("Depois")
-        console.log(dataClient)
-        
         const client = new Client()
         Object.assign(client, {
             ...dataClient,
@@ -94,6 +89,16 @@ export class ClientPrismaRepository implements ClientRepository {
     }
 
     async update(id: string, data: UpdateClientDto): Promise<Client> {
+        if (data.cpf === "") {
+            data.cpf = null;
+        }
+        if (data.cnpj === "") {
+            data.cnpj = null;
+        }
+        if (data.codigo === "") {
+            data.codigo = null;
+        }
+
         const existingClient = await this.prisma.client.findUnique({
             where: { id },
         });
