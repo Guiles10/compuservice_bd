@@ -69,11 +69,11 @@ model Comment {
 
 model Client {
   id              String        @id
-  codigo          String       @unique
+  codigo          String?       @unique
   companyName     String        @unique
-  socialName      String?
-  cnpj            String       @unique
-  cpf             String       @unique
+  socialName      String
+  cnpj            String?       @unique
+  cpf             String?       @unique
   businessPhone_1 String?
   businessPhone_2 String?   
   businessEmail   String?

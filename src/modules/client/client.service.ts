@@ -11,7 +11,7 @@ export class ClientService {
     if (await this.clientRepository.findByClientCNPJ(createClientDto.cnpj)) {
       throw new NotAcceptableException("CNPJ já cadastrado");
     }
-    if (await this.clientRepository.findByClientCNPJ(createClientDto.cnpj)) {
+    if (await this.clientRepository.findByClientCPF(createClientDto.cpf)) {
       throw new NotAcceptableException("CPF já cadastrado");
     }
     if (await this.clientRepository.findByClientCompanyName(createClientDto.companyName)) {
@@ -25,16 +25,22 @@ export class ClientService {
     return client
   }
 
-  async findByClientCNPJ(cnpj: string) {
+  async findByClientCNPJ(cnpj: string | null) {
+    if (cnpj === null) {
+      return null;
+    }
     return await this.clientRepository.findByClientCNPJ(cnpj)
   }
-  async findByClientCPF(CPF: string) {
-    return await this.clientRepository.findByClientCPF(CPF)
+  async findByClientCPF(cpf: string | null) {
+    if (cpf === null) {
+      return null;
+    }
+    return await this.clientRepository.findByClientCPF(cpf)
   }
   async findByClientCompanyName(companyName: string) {
     return await this.clientRepository.findByClientCompanyName(companyName)
   }
-  async findByClientCodigo(codigo: string) {
+  async findByClientCodigo(codigo: string | null) {
     return await this.clientRepository.findByClientCodigo(codigo)
   }
 
