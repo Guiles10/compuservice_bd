@@ -14,18 +14,3 @@
     ]
   }
 
-
-
-// {
-//     "version": 2,
-//     "build": {
-//         "src": "dist/main.ts",
-//         "use": "@now/node"
-//     },
-//     "routes": [
-//         {
-//             "src": "(.*)",
-//             "dest": "dist/main.ts"
-//         }
-//     ]
-// }
