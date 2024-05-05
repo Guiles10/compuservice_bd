@@ -10,9 +10,13 @@ export class CommentsService {
     async create(createCommentsDto: CreateCommentsDto, userId: string) {
         const comment =  await this.commentsRepository.create(createCommentsDto, userId)
         if(!comment){
-            throw new NotAcceptableException("Comment Not Found!")
+            throw new NotAcceptableException("Comentario não encontrado!")
         }
         return comment
+    }
+
+    async findByCommentTitle(title: string) {
+        return await this.commentsRepository.findByCommentTitle(title)
     }
 
     async findAll() {
@@ -22,7 +26,7 @@ export class CommentsService {
     async findOne(id: string) {
         const findComment =  await this.commentsRepository.findOne(id)
         if(!findComment){
-            throw new NotAcceptableException("Comment Not Found!")
+            throw new NotAcceptableException("Comentario não encontrado!")
         }
         return findComment
     }
@@ -30,7 +34,7 @@ export class CommentsService {
     async update(id: string, updateCommentsDto: UpdateCommentsDto) {
     const comment = await this.commentsRepository.update(id, updateCommentsDto)
     if(!comment){
-        throw new NotAcceptableException("Comment Not Found!")
+        throw new NotAcceptableException("Comentario não encontrado!")
     }
     return comment
     }
@@ -38,7 +42,7 @@ export class CommentsService {
     async remove(id: string) {
         const comment = await this.commentsRepository.findOne(id)
         if(!comment){
-            throw new NotAcceptableException("Comment Not Found!")
+            throw new NotAcceptableException("Comentario não encontrado!")
         }
         await this.commentsRepository.delete(id)
         return

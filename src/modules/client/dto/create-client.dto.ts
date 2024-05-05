@@ -2,8 +2,8 @@ import { IsArray, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class CreateClientDto {
     @IsString()
-    @IsNotEmpty()
-    codigo: string;
+    @IsOptional()
+    codigo: string | null;
 
     @IsString()
     @IsNotEmpty()
@@ -11,15 +11,31 @@ export class CreateClientDto {
 
     @IsString()
     @IsNotEmpty()
-    cnpj: string;
+    socialName: string;
 
     @IsString()
-    @IsNotEmpty()
-    businessPhone: string;
+    @IsOptional()
+    cnpj: string | null;
+
+    @IsString()
+    @IsOptional()
+    cpf: string | null;
+
+    @IsString()
+    @IsOptional()
+    businessPhone_1: string;
+
+    @IsString()
+    @IsOptional()
+    businessPhone_2: string;
 
     @IsString()
     @IsOptional()
     businessEmail: string;
+
+    @IsString()
+    @IsOptional()
+    site: string;
 
     @IsString()
     @IsOptional()

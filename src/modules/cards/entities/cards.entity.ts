@@ -14,11 +14,21 @@ export class Cards {
   userId:       string;
   type:         string[]
   clients:      string[]
+  worker:      string[]
 
-  constructor() {
-    this.id = randomUUID();
-    this.createdAt = moment().format('DD/MM/YYYY HH:mm:ss');
-    this.updatedAt = moment().format('DD/MM/YYYY HH:mm:ss');
-    this.deleteAt = null;
+    constructor(data?: Partial<Cards>) {
+
+      this.id = data?.id || randomUUID();
+
+      this.description = data?.description || null;
+      this.solution = data?.solution || null;
+
+      this.createdAt = data?.createdAt || moment().format('DD/MM/YYYY HH:mm:ss');
+      this.updatedAt = data?.updatedAt || moment().format('DD/MM/YYYY HH:mm:ss');
+      this.deleteAt = data?.deleteAt || null;
+
+      this.type = data?.type || [];
+      this.clients = data?.clients || [];
+      this.worker = data?.worker || [];
+    }
   }
-}

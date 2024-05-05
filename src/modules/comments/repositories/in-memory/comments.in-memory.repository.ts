@@ -20,6 +20,9 @@ export class CommentsInMemoryRepository implements CommentsRepository {
         return newCard
     }
 
+    async findByCommentTitle(title: string): Promise<any> {
+    }
+
     findAll(): any | Promise<any> {
         return this.dataBaseComment
     }

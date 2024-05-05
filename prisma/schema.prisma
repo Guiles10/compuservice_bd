@@ -9,9 +9,9 @@ datasource db {
 
 model User {
   id       String    @id
-  name     String
+  name     String    @unique
   email    String    @unique
-  password String
+  password String?
   function String[]
   isAdmin  Boolean
   cards    Cards[]
@@ -22,7 +22,7 @@ model User {
 
 model Cards {
   id          String   @id
-  title       String
+  title       String   @unique
   description String?
   solution    String?
   priority    String?
@@ -32,9 +32,9 @@ model Cards {
   deleteAt    String?
   tasks       Task[]
   type        String[]
-  clients     String[] 
+  clients     String[]
+  worker      String[]
   files       File[]
-
 
   user   User   @relation(fields: [userId], references: [id])
   userId String
@@ -43,19 +43,20 @@ model Cards {
 }
 
 model Task {
-  id         String  @id
-  task       String
-  completed  Boolean
-  createdAt  String
-  updatedAt  String
-  card Cards   @relation(fields: [cardsId], references: [id])
-  cardsId    String
+  id        String  @id
+  task      String?
+  completed Boolean
+  createdAt String?
+  updatedAt String?
+  card      Cards   @relation(fields: [cardsId], references: [id])
+  cardsId   String
 
   @@map("tasks")
 }
 
 model Comment {
   id        String  @id
+  title     String  @unique
   comment   String
   createdAt String
   updatedAt String
@@ -67,30 +68,34 @@ model Comment {
 }
 
 model Client {
-  id            String        @id
-  codigo        String
-  companyName   String
-  cnpj          String        @unique
-  businessPhone String
-  businessEmail String
-  comment       String
-  cep           String
-  state         String
-  city          String
-  street        String
-  neighborhood  String
-  number        String
-  responsibles  Responsible[]
+  id              String        @id
+  codigo          String?       @unique
+  companyName     String        @unique
+  socialName      String
+  cnpj            String?       @unique
+  cpf             String?       @unique
+  businessPhone_1 String?
+  businessPhone_2 String?   
+  businessEmail   String?
+  site            String?
+  comment         String?
+  cep             String?
+  state           String?
+  city            String?
+  street          String?
+  neighborhood    String?
+  number          String?
+  responsibles    Responsible[]
 
   @@map("client")
 }
 
 model Responsible {
-  id       String @id
-  name     String
-  function String
-  email    String
-  phone    String
+  id       String  @id
+  name     String?
+  function String?
+  email    String?
+  phone    String?
   clientId String?
 
   client Client? @relation(fields: [clientId], references: [id])
@@ -99,12 +104,12 @@ model Responsible {
 }
 
 model File {
-  id        String  @id
-  filename  String  @unique
-  url       String
+  id        String @id
+  fileName  String @unique
+  url       String?
   createdAt String
-  updatedAt String
-  card      Cards    @relation(fields: [cardId], references: [id])
+  updatedAt String?
+  card      Cards  @relation(fields: [cardId], references: [id])
   cardId    String
 
   @@map("file")

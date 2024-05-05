@@ -14,6 +14,7 @@ export class CommentsPrismaRepository implements CommentsRepository {
 
     async create(data: CreateCommentsDto, userId: string): Promise<Comments> {
         const comment = new Comments()
+        console.log(data)
         Object.assign(comment, {
             ...data,
         })
@@ -21,6 +22,13 @@ export class CommentsPrismaRepository implements CommentsRepository {
             data: { ...comment, userId }
         })
         return newComment
+    }
+
+    async findByCommentTitle(title: string): Promise<any> {
+        const clientCompName = await this.prisma.comment.findUnique({
+            where: {title}
+        })
+        return clientCompName
     }
 
     async findAll(): Promise<any> {

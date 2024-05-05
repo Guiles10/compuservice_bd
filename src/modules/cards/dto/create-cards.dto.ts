@@ -50,4 +50,8 @@ export class CreateCardsDto {
   @IsArray()
   @IsOptional()
   clients: string[];
+
+  @IsArray()
+  @IsOptional()
+  worker: string[];
 }

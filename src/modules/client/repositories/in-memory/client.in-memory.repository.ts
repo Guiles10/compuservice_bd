@@ -19,6 +19,15 @@ export class CardsInMemoryRepository implements ClientRepository {
         return client
     }
 
+    async findByClientCNPJ(cnpj: string): Promise<any> {
+    }
+    async findByClientCPF(cpf: string): Promise<any> {
+    }
+    async findByClientCompanyName(companyName: string): Promise<any> {
+    }
+    async findByClientCodigo(codigo: string): Promise<any> {
+    }
+
     findAll(): any | Promise<Client> {
         return this.dataBaseClient
     }

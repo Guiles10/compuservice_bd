@@ -7,6 +7,7 @@ export abstract class CommentsRepository {
     abstract create(data: CreateCommentsDto, userId: string): Promise<Comments> | Comments;
     abstract findAll(): Promise<Comments> | undefined | Comments[];
     abstract findOne(id: string): Promise<Comments> | Comments;
+    abstract findByCommentTitle(title: string): Promise<Comments> | Comments;
     abstract update(id: string, data: UpdateCommentsDto): Promise<Comments> | Comments;
     abstract delete(id: string): Promise<void> | void; 
 }

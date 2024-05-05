@@ -3,11 +3,11 @@ import * as moment from 'moment';
 
 export class Comments {
   readonly id: string;
+  title: string;
   comment: string;
-  priority: string;
+  priority: string | null;
   readonly createdAt: string;
   readonly updatedAt: string;
-  userId: string;
 
   constructor() {
     this.id = randomUUID();

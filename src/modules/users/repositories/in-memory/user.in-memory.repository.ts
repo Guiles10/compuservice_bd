@@ -33,6 +33,11 @@ export class UsersInMemoryRepository implements UsersRepository {
         return user
     }
 
+    findByName(name: string): User | Promise<User> {
+        const user = this.database.find((user) => user.name == name)
+        return user
+    }
+
     update(id: string, data: UpdateUserDto): any | Promise<any> {
         // const userIndex = this.database.findIndex((user) => user.id == id)
         // this. database[userIndex] = {

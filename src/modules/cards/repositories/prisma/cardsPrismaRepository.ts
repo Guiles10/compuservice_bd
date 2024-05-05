@@ -17,12 +17,20 @@ export class CardsPrismaRepository implements CardsRepository {
         const card = new Cards()
         Object.assign(card, {
             ...data,
-            status: data.status || "A Fazer"
+            status: "A Fazer"
         })
         const newCard = await this.prisma.cards.create({
             data: { ...card, userId }
         })
+
         return plainToInstance(Cards, newCard)
+    }
+
+    async findByCardTitle (title: string): Promise<any> {
+        const cardTitle = await this.prisma.cards.findUnique({
+            where: {title}
+        })
+        return cardTitle
     }
 
     async findAll(): Promise<Cards[]> {
@@ -112,7 +120,7 @@ export class CardsPrismaRepository implements CardsRepository {
                 throw new Error(`Cartão com ID ${cardId} não encontrado.`);
             }
     
-            const deletedFile = card.files.filter(file => file.filename == fileName);
+            const deletedFile = card.files.filter(file => file.fileName == fileName);
             const idFile = deletedFile[0].id
 
             await this.prisma.file.delete({

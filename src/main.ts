@@ -8,7 +8,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe())
   
   app.enableCors({
-    origin: ['http://localhost:3000', 'https://compuservice-front.vercel.app']
+    origin: ['http://localhost:3000', 'https://compuservice-front.vercel.app'],
+    credentials: true
   });
 
   app.useGlobalPipes(

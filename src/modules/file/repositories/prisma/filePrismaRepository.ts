@@ -50,12 +50,12 @@ export class FilePrismaRepository implements FileRepository {
     
         const files = new File()
         Object.assign(files, {
-            filename: file.originalname,
+            fileName: file.originalname,
             url: signedUrlData.signedUrl
         })
     
         const existingFile = await this.prisma.file.findUnique({
-            where: { filename: file.originalname }
+            where: { fileName: file.originalname }
         });
         
         if (existingFile) {
