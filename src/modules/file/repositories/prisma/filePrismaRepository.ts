@@ -29,7 +29,7 @@ export class FilePrismaRepository implements FileRepository {
         
         const mimeType = fileExtension === 'pdf' ? 'application/pdf' : `image/${fileExtension}`;
         
-        const { data: uploadData, error: uploadError } = await this.supabase.storage.from('compuservice').upload(file.originalname, file.buffer, {
+        const { data: uploadData, error: uploadError } = await this.supabase.storage.from('Compuservice').upload(file.originalname, file.buffer, {
             upsert: true,
             contentType: mimeType
         });
@@ -40,7 +40,7 @@ export class FilePrismaRepository implements FileRepository {
     
         const { data: signedUrlData, error: signedUrlError } = await this.supabase
             .storage
-            .from('compuservice')
+            .from('Compuservice')
             .createSignedUrl(file.originalname, 86.400 * 3650);
     
         if (signedUrlError) {
@@ -74,7 +74,7 @@ export class FilePrismaRepository implements FileRepository {
     }
 
     async delete(fileName: string): Promise<any> {
-        const { error } = await this.supabase.storage.from('compuservice').remove([fileName]);
+        const { error } = await this.supabase.storage.from('Compuservice').remove([fileName]);
         if (error) {
             throw new Error(`Erro ao excluir o arquivo: ${error.message}`);
         }
