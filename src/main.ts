@@ -13,10 +13,10 @@ async function bootstrap() {
   });
 
   app.useGlobalPipes(
-    new ValidationPipe({ whitelist: true }),
     new ValidationPipe({
+      whitelist: true,
       transform: true,
-      transformOptions: { groups: ['Trasforme']}
+      transformOptions: { groups: ['Transforme'] }
     })
   )
   await app.listen(process.env.PORT || 3001);

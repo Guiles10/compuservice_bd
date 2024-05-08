@@ -1,15 +1,30 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "dist/main.js",
-        "use": "@now/node"
+  "version": 3,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["prisma/schema.prisma"]
       }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "dist/main.js"
-      }
-    ]
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/api/$1"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "SUPABASE_KEY": "@supabase_key",
+    "SUPABASE_URL": "@supabase_url"
+  },
+  "build": {
+    "env": {
+      "DATABASE_URL": "@database_url",
+      "SUPABASE_KEY": "@supabase_key",
+      "SUPABASE_URL": "@supabase_url"
+    }
   }
+}
