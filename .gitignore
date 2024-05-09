@@ -1,5 +1,5 @@
 # compiled output
-/dist
+# /dist
 /node_modules
 Personal_Page-Guileano/
 # Logs
@@ -37,4 +37,3 @@ node_modules
 
 .vercel
 
-.vercel
