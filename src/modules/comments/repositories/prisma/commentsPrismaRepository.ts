@@ -5,7 +5,7 @@ import { CreateCommentsDto } from '../../dto/create-comments.dto';
 import { Comments } from '../../entities/comments.entity';
 import { UpdateCommentsDto } from '../../dto/update-comments.dto';
 import { PrismaService } from 'src/database/prisma.service';
-// import * as moment from 'moment';
+import * as moment from 'moment';
 
 @Injectable()
 export class CommentsPrismaRepository implements CommentsRepository {
@@ -71,7 +71,7 @@ export class CommentsPrismaRepository implements CommentsRepository {
             where: { id },
             data: {
                 ...data,
-                // updatedAt: moment().format('DD/MM/YYYY HH:mm:ss')
+                updatedAt: moment().format('DD/MM/YYYY HH:mm:ss')
             },
             include: {
                 user: {
