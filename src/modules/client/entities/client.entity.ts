@@ -1,5 +1,4 @@
 import { randomUUID } from "crypto";
-import * as moment from 'moment';
 
 export class Client {
     readonly id:    string
