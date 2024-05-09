@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { CardsRepository } from '../cards.repository';
 import { PrismaService } from 'src/database/prisma.service';
 import { plainToInstance } from 'class-transformer';
-// import * as moment from 'moment';
+import * as moment from 'moment';
 import { CreateCardsDto } from '../../dto/create-cards.dto';
 import { Cards } from '../../entities/cards.entity';
 import { UpdateCardsDto } from '../../dto/update-cards.dto';
@@ -79,7 +79,7 @@ export class CardsPrismaRepository implements CardsRepository {
             where: { id },
             data: {
                 ...data,
-                // updatedAt: moment().format('DD/MM/YYYY HH:mm:ss')
+                updatedAt: moment().format('DD/MM/YYYY HH:mm:ss')
             },
             include: {
                 tasks: true,
