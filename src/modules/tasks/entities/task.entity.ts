@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import * as moment from 'moment';
+// import * as moment from 'moment';
 
 export class Task {
     readonly id: string;
@@ -14,7 +14,7 @@ export class Task {
 
         this.completed = data?.completed || false;
 
-        this.updatedAt = data?.updatedAt || moment().format('DD/MM/YYYY HH:mm:ss');
-        this.createdAt = data?.createdAt || moment().format('DD/MM/YYYY HH:mm:ss');
+        // this.updatedAt = data?.updatedAt || moment().format('DD/MM/YYYY HH:mm:ss');
+        // this.createdAt = data?.createdAt || moment().format('DD/MM/YYYY HH:mm:ss');
     }
 }

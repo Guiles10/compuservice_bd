@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import * as moment from 'moment';
+// import * as moment from 'moment';
 
 export class Comments {
   readonly id: string;
@@ -11,7 +11,7 @@ export class Comments {
 
   constructor() {
     this.id = randomUUID();
-    this.createdAt = moment().format('DD/MM/YYYY HH:mm:ss');
-    this.updatedAt = moment().format('DD/MM/YYYY HH:mm:ss');
+    // this.createdAt = moment().format('DD/MM/YYYY HH:mm:ss');
+    // this.updatedAt = moment().format('DD/MM/YYYY HH:mm:ss');
   }
 }
