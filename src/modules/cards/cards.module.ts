@@ -9,7 +9,7 @@ import { CardsRepository } from './repositories/cards.repository';
   controllers: [CardsController], 
   providers: [
     CardsService,
-    ,
+    PrismaService,
     {
       provide: CardsRepository,
       useClass: CardsPrismaRepository,
