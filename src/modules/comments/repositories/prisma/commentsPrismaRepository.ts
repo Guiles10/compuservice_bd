@@ -4,7 +4,7 @@ import { CommentsRepository } from '../comments.repository';
 import { CreateCommentsDto } from '../../dto/create-comments.dto';
 import { Comments } from '../../entities/comments.entity';
 import { UpdateCommentsDto } from '../../dto/update-comments.dto';
-import { PrismaService } from 'src/database/prisma.service';
+import { PrismaService } from '../../../../database/prisma.service';
 import * as moment from 'moment';
 
 @Injectable()

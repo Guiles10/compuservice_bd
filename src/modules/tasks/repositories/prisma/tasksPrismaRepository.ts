@@ -1,6 +1,6 @@
 
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma.service';
+import { PrismaService } from '../../../../database/prisma.service';
 import { TaskRepository } from '../task.repository';
 import { CreateTaskDto } from '../../dto/create-task.dto';
 import { Task } from '../../entities/task.entity';

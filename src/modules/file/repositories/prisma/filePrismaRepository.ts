@@ -1,6 +1,6 @@
 
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma.service';
+import { PrismaService } from '../../../../database/prisma.service';
 import { FileRepository } from '../file.repository';
 import { createClient } from '@supabase/supabase-js';
 import { File } from '../../entities/file.entity';

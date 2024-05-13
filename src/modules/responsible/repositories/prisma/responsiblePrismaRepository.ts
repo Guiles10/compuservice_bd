@@ -1,6 +1,6 @@
 
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma.service';
+import { PrismaService } from '../../../../database/prisma.service';
 import { ResponsibleRepository } from '../responsible.repository';
 import { Responsible } from '../../entities/responsible.entity';
 import { CreateResponsibleDto } from '../../dto/create-responsible.dto';
