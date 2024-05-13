@@ -8,8 +8,6 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
 
-    // "esModuleInterop": false,
-
     "target": "ES2021",
     "sourceMap": true,
     "outDir": "./dist",
